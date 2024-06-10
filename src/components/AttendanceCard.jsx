@@ -5,10 +5,9 @@ import {
   Dimensions,
   Animated,
   TouchableOpacity,
+  StyleSheet
 } from 'react-native';
 import React, {useCallback, useState} from 'react';
-import Svg, { Defs, RadialGradient, Stop, Rect } from 'react-native-svg';
-
 
 export default function AttendanceCard({
   item,
@@ -22,7 +21,7 @@ export default function AttendanceCard({
   const {height, width} = Dimensions.get('window');
 
   const rotate = swipe.x.interpolate({
-    inputRange: [-100, 0, 100],
+    inputRange: [-200, 0, 200],
     outputRange: ['-10deg', '0deg', '10deg'],
   });
 
@@ -35,6 +34,16 @@ export default function AttendanceCard({
   const AbsentOpacity = swipe.x.interpolate({
     inputRange: [-100, -10],
     outputRange: [1, 0],
+    extrapolate: 'clamp',
+  });
+
+  const overlayColor = swipe.x.interpolate({
+    inputRange: [-300, 0, 300],
+    outputRange: [
+      'rgba(255, 0, 0, 0.3)',
+      'rgba(0, 0, 0, 0)',
+      'rgba(0, 255, 0, 0.3)',
+    ],
     extrapolate: 'clamp',
   });
 
@@ -70,12 +79,13 @@ export default function AttendanceCard({
       key={index}
       style={[
         {
-          width: width ,
-          height: height,
+          width: width - 20,
+          height: height - 200,
           alignSelf: 'center',
           position: 'absolute',
-          // top: 20,
-          // borderRadius: 30,
+          top: 80,
+          borderRadius: 30,
+          overflow: 'hidden',
         },
         isfirst &&
           startAttendance && {
@@ -85,8 +95,16 @@ export default function AttendanceCard({
       {...rest}>
       <Image
         source={item.image}
-        style={{width: '100%', height: '100%', borderRadius: 0}}
+        style={{width: '100%', height: '100%', borderRadius: 30}}
       />
+      {isfirst && startAttendance && (
+        <Animated.View
+          style={{
+            ...StyleSheet.absoluteFillObject,
+            backgroundColor: overlayColor,
+          }}
+        />
+      )}
       {startAttendance ? (
         <></>
       ) : (
@@ -99,7 +117,7 @@ export default function AttendanceCard({
               right: 0,
               bottom: 0,
               borderRadius: 30,
-              // backgroundColor: 'rgba(0,0,0,0.5)',
+              backgroundColor: 'rgba(255,255,255,0.6)',
               justifyContent: 'center',
               alignItems: 'center',
             }}>
@@ -117,42 +135,11 @@ export default function AttendanceCard({
               className="bg-[#4E2973] px-5 py-2 h-[50] w-[205] ">
               <Text
                 className="text-white text-lg "
-                style={{ fontFamily: 'Satoshi-Regular' }}>
+                style={{fontFamily: 'Satoshi-Regular'}}>
                 Start Attendance
               </Text>
             </TouchableOpacity>
           </View>
-          {/* <View className="absolute top-1/2 left-2/5 transform -translate-x-1/2 -translate-y-1/2 rounded-full w-[205px] h-[50px]">
-      <Svg height="100%" width="100%" className="absolute rounded-full">
-        <Defs>
-          <RadialGradient
-            id="grad"
-            cx="50%"
-            cy="50%"
-            r="50%"
-            fx="50%"
-            fy="50%">
-            <Stop offset="0%" stopColor="#4E2973" stopOpacity="1" />
-            <Stop offset="100%" stopColor="#4E2973" stopOpacity="0.5" />
-          </RadialGradient>
-        </Defs>
-        <Rect
-          x="0"
-          y="0"
-          width="100%"
-          height="100%"
-          fill="url(#000)"
-          rx="40"
-        />
-      </Svg>
-      <TouchableOpacity
-        onPress={onStartAttendance}
-        className="flex-1 justify-center items-center rounded-full">
-        <Text className="text-white text-lg" style={{ fontFamily: 'Satoshi-Regular' }}>
-          Start Attendance
-        </Text>
-      </TouchableOpacity>
-    </View> */}
         </>
       )}
       <Text
@@ -161,7 +148,8 @@ export default function AttendanceCard({
           bottom: 100,
           left: 20,
           color: '#fff',
-          fontSize: 30,
+          fontSize: 28,
+          fontWeight: 700,
           fontFamily: 'Satoshi-Regular',
         }}>
         {item.name}
@@ -174,8 +162,9 @@ export default function AttendanceCard({
           bottom: 60,
           left: 20,
           color: '#fff',
-          fontSize: 20,
+          fontSize: 18,
           fontFamily: 'Satoshi-Regular',
+          fontWeight: 400,
         }}>
         RollNumber: {item.rollNumber}
       </Text>
@@ -185,7 +174,8 @@ export default function AttendanceCard({
           bottom: 30,
           left: 20,
           color: '#fff',
-          fontSize: 20,
+          fontSize: 18,
+          fontWeight: 400,
         }}>
         PhoneNumber: {item.phoneNumber}
       </Text>

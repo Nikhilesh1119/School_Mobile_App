@@ -9,6 +9,7 @@ import {
   SafeAreaView,
   StyledView,
   Dimensions,
+  Image,
 } from 'react-native';
 import React, {useCallback, useRef, useState} from 'react';
 import AttendanceCard from './AttendanceCard';
@@ -168,25 +169,10 @@ export default function Attendance() {
     },
   });
 
-  const handleStartAttendance = useCallback((value) => {
+  const handleStartAttendance = useCallback(value => {
     setStartAttendance(value);
   }, []);
 
-  // const removeCard = useCallback(() => {
-  //   setData(prepState => prepState.slice(1));
-  //   swipe.setValue({x: 0, y: 0});
-  // }, [swipe]);
-
-  // const handelSelection = useCallback(
-  //   direction => {
-  //     Animated.timing(swipe, {
-  //       toValue: {x: direction * 500, y: 0},
-  //       useNativeDriver: true,
-  //       duration: 500,
-  //     }).start(removeCard);
-  //   },
-  //   [removeCard],
-  // );
 
   const handleToggleAttendance = (student, isPresent) => {
     if (isPresent) {
@@ -226,7 +212,7 @@ export default function Attendance() {
       {data.length === 0 && (
         <View style={{height: height - 90}}>
           <ScrollView>
-            {absent.length>0 && (
+            {absent.length > 0 && (
               <View className="flex mx-5 my-7">
                 <Text className="text-black text-2xl">Absent's</Text>
                 <View className="flex flex-col justify-between mt-5 py-2 bg-gray-50 rounded-3xl">
@@ -236,8 +222,15 @@ export default function Attendance() {
                         key={index}
                         className="flex flex-row justify-between py-3 border border-y-white border-x-transparent">
                         <View className="flex flex-row">
-                          <Text className="text-black text-xl mx-3">logo</Text>
-                          <Text className="text-black text-xl mx-1">
+                          <Image
+                            source={st.image}
+                            style={{
+                              width: 40,
+                              height: 40,
+                              borderRadius: 30,
+                            }}
+                          />
+                          <Text className="text-black text-xl mx-2">
                             {st.name}
                           </Text>
                         </View>
@@ -254,7 +247,7 @@ export default function Attendance() {
                 </View>
               </View>
             )}
-            {present.length>0 && (
+            {present.length > 0 && (
               <View className=" mx-5 my-7">
                 <Text className="text-black text-2xl">Present's</Text>
                 <View className="flex flex-col justify-between mt-5 py-2 bg-gray-50 rounded-3xl">
@@ -264,8 +257,15 @@ export default function Attendance() {
                         key={index}
                         className="flex flex-row justify-between py-3 border border-y-white border-x-transparent">
                         <View className="flex flex-row">
-                          <Text className="text-black text-xl mx-3">logo</Text>
-                          <Text className="text-black text-xl mx-1">
+                        <Image
+                            source={st.image}
+                            style={{
+                              width: 40,
+                              height: 40,
+                              borderRadius: 30,
+                            }}
+                          />
+                          <Text className="text-black text-xl mx-2">
                             {st.name}
                           </Text>
                         </View>
@@ -282,6 +282,11 @@ export default function Attendance() {
                 </View>
               </View>
             )}
+            <TouchableOpacity className="flex justify-center items-center h-[50] rounded-3xl mx-3 bg-[#4e2973]">
+              <Text className="text-white text-lg font-medium">
+                Save and proceed
+              </Text>
+            </TouchableOpacity>
           </ScrollView>
         </View>
       )}
