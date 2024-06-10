@@ -1,14 +1,9 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
-import {SafeAreaView, Text,TouchableOpacity} from 'react-native';
-import Login from './src/screens/Login';
-import Attendance from './src/components/Attendance';
+import Navigation from './src/navigation/Navigation';
+import DashboardScreen from './src/screens/DashboardScreen';
 
-function App() {
-  return (
-  //  <Text className="text-red-700">Hello Kuldeep</Text>
-  // <Login/>
-  <Attendance/>
-  );
+export default function App() {
+  return <Navigation />;
+  // return <DashboardScreen />;
 }
-
-export default App;

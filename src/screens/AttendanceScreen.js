@@ -12,9 +12,9 @@ import {
   Image,
 } from 'react-native';
 import React, {useCallback, useRef, useState} from 'react';
-import AttendanceCard from './AttendanceCard';
+import AttendanceCard from '../components/AttendanceCard';
 
-export default function Attendance() {
+export default function AttendanceScreen({navigation,setAttendanceStarted }) {
   const [present, setPresent] = useState([]);
   const [absent, setAbsent] = useState([]);
   const [startAttendance, setStartAttendance] = useState(false);
@@ -152,7 +152,7 @@ export default function Attendance() {
     onPanResponderRelease: (_, {dx, dy}) => {
       // console.log('released:' + 'dx:' + dx + ' dy:' + dy);
       let direction = Math.sign(dx);
-      let isActionActive = Math.abs(dx) > 200;
+      let isActionActive = Math.abs(dx) > 120;
       if (isActionActive) {
         Animated.timing(swipe, {
           toValue: {x: 500 * dx, y: dy},
@@ -169,10 +169,10 @@ export default function Attendance() {
     },
   });
 
-  const handleStartAttendance = useCallback(value => {
-    setStartAttendance(value);
-  }, []);
-
+  const handleStartAttendance = useCallback(() => {
+    setStartAttendance(true);
+    setAttendanceStarted(true);
+  }, [setAttendanceStarted]);
 
   const handleToggleAttendance = (student, isPresent) => {
     if (isPresent) {
@@ -186,6 +186,123 @@ export default function Attendance() {
       );
       setPresent(prev => [...prev, student]);
     }
+  };
+
+  const handleSaveAndProceed = useCallback(() => {
+    setStartAttendance(false);
+    setAttendanceStarted(false);
+  }, [setAttendanceStarted]);
+
+  const reAttendance = () => {
+    setPresent([])
+    setAbsent([])
+    setData([
+      {
+        image: require('../assets/images/s1.jpg'),
+        rollNumber: 101,
+        name: 'Nikhilesh',
+        bloodGroup: 'O+',
+        phoneNumber: '9999999999',
+      },
+      {
+        image: require('../assets/images/s2.jpg'),
+        rollNumber: 102,
+        name: 'Kuldeep',
+        bloodGroup: 'A+',
+        phoneNumber: '9999988888',
+      },
+      {
+        image: require('../assets/images/s3.jpg'),
+        rollNumber: 103,
+        name: 'Jainam',
+        bloodGroup: 'B+',
+        phoneNumber: '9999977777',
+      },
+      {
+        image: require('../assets/images/s4.jpg'),
+        rollNumber: 104,
+        name: 'Ishika',
+        bloodGroup: 'O-',
+        phoneNumber: '9999966666',
+      },
+      {
+        image: require('../assets/images/s1.jpg'),
+        rollNumber: 106,
+        name: 'Jaydeep',
+        bloodGroup: 'AB+',
+        phoneNumber: '9999944444',
+      },
+      {
+        image: require('../assets/images/s2.jpg'),
+        rollNumber: 107,
+        name: 'Kunal',
+        bloodGroup: 'AB-',
+        phoneNumber: '9999955555',
+      },
+      {
+        image: require('../assets/images/s3.jpg'),
+        rollNumber: 108,
+        name: 'Mahendra',
+        bloodGroup: 'AB-',
+        phoneNumber: '9999955555',
+      },
+      {
+        image: require('../assets/images/s1.jpg'),
+        rollNumber: 109,
+        name: 'Himanshu',
+        bloodGroup: 'AB-',
+        phoneNumber: '9999955555',
+      },
+      {
+        image: require('../assets/images/s2.jpg'),
+        rollNumber: 110,
+        name: 'Jitu',
+        bloodGroup: 'AB-',
+        phoneNumber: '9999955555',
+      },
+      {
+        image: require('../assets/images/s3.jpg'),
+        rollNumber: 111,
+        name: 'Nitin',
+        bloodGroup: 'AB-',
+        phoneNumber: '9999955555',
+      },
+      {
+        image: require('../assets/images/s1.jpg'),
+        rollNumber: 112,
+        name: 'Narayan',
+        bloodGroup: 'AB-',
+        phoneNumber: '9999955555',
+      },
+      {
+        image: require('../assets/images/s1.jpg'),
+        rollNumber: 113,
+        name: 'Hariom',
+        bloodGroup: 'AB-',
+        phoneNumber: '9999955555',
+      },
+      {
+        image: require('../assets/images/s2.jpg'),
+        rollNumber: 114,
+        name: 'Gourav',
+        bloodGroup: 'AB-',
+        phoneNumber: '9999955555',
+      },
+      {
+        image: require('../assets/images/s3.jpg'),
+        rollNumber: 115,
+        name: 'Himesh',
+        bloodGroup: 'AB-',
+        phoneNumber: '9999955555',
+      },
+      {
+        image: require('../assets/images/s5.jpg'),
+        rollNumber: 116,
+        name: 'Muskan',
+        bloodGroup: 'AB-',
+        phoneNumber: '9999955555',
+      },
+    ]);
   };
 
   return (
@@ -257,7 +374,7 @@ export default function Attendance() {
                         key={index}
                         className="flex flex-row justify-between py-3 border border-y-white border-x-transparent">
                         <View className="flex flex-row">
-                        <Image
+                          <Image
                             source={st.image}
                             style={{
                               width: 40,
@@ -282,7 +399,12 @@ export default function Attendance() {
                 </View>
               </View>
             )}
-            <TouchableOpacity className="flex justify-center items-center h-[50] rounded-3xl mx-3 bg-[#4e2973]">
+            <TouchableOpacity onPress={reAttendance} className="flex justify-center items-center h-[50] mb-2 rounded-3xl mx-3 bg-[#4e2973]">
+              <Text className="text-white text-lg font-medium">
+                Re-evaluate Attendance
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleSaveAndProceed} className="flex justify-center items-center h-[50] rounded-3xl mx-3 bg-[#4e2973]">
               <Text className="text-white text-lg font-medium">
                 Save and proceed
               </Text>
