@@ -14,7 +14,7 @@ import {
 import React, {useCallback, useRef, useState} from 'react';
 import AttendanceCard from '../components/AttendanceCard';
 
-export default function AttendanceScreen({navigation,setAttendanceStarted }) {
+export default function AttendanceScreen({setAttendanceStarted}) {
   const [present, setPresent] = useState([]);
   const [absent, setAbsent] = useState([]);
   const [startAttendance, setStartAttendance] = useState(false);
@@ -194,8 +194,10 @@ export default function AttendanceScreen({navigation,setAttendanceStarted }) {
   }, [setAttendanceStarted]);
 
   const reAttendance = () => {
-    setPresent([])
-    setAbsent([])
+    setStartAttendance(false);
+    setAttendanceStarted(false);
+    setPresent([]);
+    setAbsent([]);
     setData([
       {
         image: require('../assets/images/s1.jpg'),
@@ -320,6 +322,7 @@ export default function AttendanceScreen({navigation,setAttendanceStarted }) {
                 swipe={swipe}
                 startAttendance={startAttendance}
                 onStartAttendance={handleStartAttendance}
+                onCancleAttendance={reAttendance}
                 {...dragHandlers}
               />
             );
@@ -399,12 +402,16 @@ export default function AttendanceScreen({navigation,setAttendanceStarted }) {
                 </View>
               </View>
             )}
-            <TouchableOpacity onPress={reAttendance} className="flex justify-center items-center h-[50] mb-2 rounded-3xl mx-3 bg-[#4e2973]">
+            <TouchableOpacity
+              onPress={reAttendance}
+              className="flex justify-center items-center h-[50] mb-2 rounded-3xl mx-3 bg-[#4e2973]">
               <Text className="text-white text-lg font-medium">
                 Re-evaluate Attendance
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleSaveAndProceed} className="flex justify-center items-center h-[50] rounded-3xl mx-3 bg-[#4e2973]">
+            <TouchableOpacity
+              onPress={handleSaveAndProceed}
+              className="flex justify-center items-center h-[50] rounded-3xl mx-3 bg-[#4e2973]">
               <Text className="text-white text-lg font-medium">
                 Save and proceed
               </Text>

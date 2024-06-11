@@ -1,80 +1,97 @@
 import {
-    View,
-    Text,
-    Image,
-    Dimensions,
-    Animated,
-    TouchableOpacity,
-    StyleSheet
-  } from 'react-native';
-  import React, {useCallback, useState} from 'react';
-  
-  export default function AttendanceCard({
-    item,
-    index,
-    isfirst,
-    swipe,
-    onStartAttendance,
-    startAttendance,
-    ...rest
-  }){
-    const {height, width} = Dimensions.get('window');
-  
-    const rotate = swipe.x.interpolate({
-      inputRange: [-200, 0, 200],
-      outputRange: ['-10deg', '0deg', '10deg'],
-    });
-  
-    const PresentOpacity = swipe.x.interpolate({
-      inputRange: [10, 100],
-      outputRange: [0, 1],
-      extrapolate: 'clamp',
-    });
-  
-    const AbsentOpacity = swipe.x.interpolate({
-      inputRange: [-100, -10],
-      outputRange: [1, 0],
-      extrapolate: 'clamp',
-    });
-  
-    const overlayColor = swipe.x.interpolate({
-      inputRange: [-300, 0, 300],
-      outputRange: [
-        'rgba(255, 0, 0, 0.3)',
-        'rgba(0, 0, 0, 0)',
-        'rgba(0, 255, 0, 0.3)',
-      ],
-      extrapolate: 'clamp',
-    });
-  
-    const attendanceSelection = useCallback(() => {
-      return (
-        <>
-          <Animated.View
-            style={{
-              position: 'absolute',
-              top: 60,
-              right: 20,
-              opacity: AbsentOpacity,
-              transform: [{rotate: '30deg'}],
-            }}>
-            <AttendanceChoice type={'Absent'} />
-          </Animated.View>
-          <Animated.View
-            style={{
-              position: 'absolute',
-              top: 60,
-              left: 20,
-              opacity: PresentOpacity,
-              transform: [{rotate: '-30deg'}],
-            }}>
-            <AttendanceChoice type={'Present'} />
-          </Animated.View>
-        </>
-      );
-    }, []);
-  
+  View,
+  Text,
+  Image,
+  Dimensions,
+  Animated,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+import React, {useCallback, useState} from 'react';
+
+export default function AttendanceCard({
+  item,
+  index,
+  isfirst,
+  swipe,
+  onStartAttendance,
+  startAttendance,
+  onCancleAttendance,
+  ...rest
+}) {
+  const {height, width} = Dimensions.get('window');
+
+  const rotate = swipe.x.interpolate({
+    inputRange: [-200, 0, 200],
+    outputRange: ['-10deg', '0deg', '10deg'],
+  });
+
+  const PresentOpacity = swipe.x.interpolate({
+    inputRange: [10, 100],
+    outputRange: [0, 1],
+    extrapolate: 'clamp',
+  });
+
+  const AbsentOpacity = swipe.x.interpolate({
+    inputRange: [-100, -10],
+    outputRange: [1, 0],
+    extrapolate: 'clamp',
+  });
+
+  const overlayColor = swipe.x.interpolate({
+    inputRange: [-300, 0, 300],
+    outputRange: [
+      'rgba(255, 0, 0, 0.3)',
+      'rgba(0, 0, 0, 0)',
+      'rgba(0, 255, 0, 0.3)',
+    ],
+    extrapolate: 'clamp',
+  });
+
+  const attendanceSelection = useCallback(() => {
     return (
+      <>
+        <Animated.View
+          style={{
+            position: 'absolute',
+            top: 60,
+            right: 20,
+            opacity: AbsentOpacity,
+            transform: [{rotate: '30deg'}],
+          }}>
+          <AttendanceChoice type={'Absent'} />
+        </Animated.View>
+        <Animated.View
+          style={{
+            position: 'absolute',
+            top: 60,
+            left: 20,
+            opacity: PresentOpacity,
+            transform: [{rotate: '-30deg'}],
+          }}>
+          <AttendanceChoice type={'Present'} />
+        </Animated.View>
+      </>
+    );
+  }, []);
+
+  return (
+    <View>
+      {isfirst && startAttendance && (
+        <TouchableOpacity
+          onPress={onCancleAttendance}
+          style={{
+            position: 'absolute',
+            top: 20,
+            right: 20,
+            padding: 10,
+            borderRadius: 30,
+            backgroundColor: '#4E2973',
+          }}>
+          <Text style={{color: 'white', fontSize: 16}}>Cancel Attendance</Text>
+        </TouchableOpacity>
+      )}
+
       <Animated.View
         key={index}
         style={[
@@ -83,7 +100,7 @@ import {
             height: height - 200,
             alignSelf: 'center',
             position: 'absolute',
-            top: 80,
+            top: 90,
             borderRadius: 30,
             overflow: 'hidden',
           },
@@ -181,24 +198,25 @@ import {
         </Text>
         {isfirst && startAttendance && attendanceSelection()}
       </Animated.View>
-    );
-  }
-  
-  const AttendanceChoice = ({type}) => {
-    return (
-      <View>
-        <Text
-          style={{
-            color: type == 'Present' ? '#01FF84' : '#F6006B',
-            fontSize: 40,
-            borderWidth: 4,
-            borderColor: type == 'Present' ? '#01FF84' : '#F6006B',
-            paddingLeft: 10,
-            paddingRight: 10,
-            fontFamily: 'Satoshi-Regular',
-          }}>
-          {type}
-        </Text>
-      </View>
-    );
-  };
+    </View>
+  );
+}
+
+const AttendanceChoice = ({type}) => {
+  return (
+    <View>
+      <Text
+        style={{
+          color: type == 'Present' ? '#01FF84' : '#F6006B',
+          fontSize: 40,
+          borderWidth: 4,
+          borderColor: type == 'Present' ? '#01FF84' : '#F6006B',
+          paddingLeft: 10,
+          paddingRight: 10,
+          fontFamily: 'Satoshi-Regular',
+        }}>
+        {type}
+      </Text>
+    </View>
+  );
+};
