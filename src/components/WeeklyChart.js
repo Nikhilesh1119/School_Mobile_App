@@ -54,7 +54,6 @@ const WeeklyChart = () => {
         width={300}
         height={400}
         rotateLabel={true}
-        // dashGap={0}
         rulesColor="#4c39a9"
         barWidth={37}
         spacing={11}

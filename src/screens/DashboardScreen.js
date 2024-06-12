@@ -48,7 +48,7 @@ const AttendanceDashboard = () => {
           />
         </View>
 
-        <View className="flex flex-row  justify-between mb-6 mx-5 py-2">
+        <View className="flex flex-row  justify-between mb-3 mx-5 py-2">
           <Text className="text-xl font-bold mb-1.5 text-[#a491b7]">
             Statistics
           </Text>

@@ -25,14 +25,13 @@ const MonthlyChart = () => {
         dashGap={0}
         noOfSections={5}
         stepValue={5}
-        // barBorderRadius={6}
         maxValue={50}
         stackData={monthlyData}
         xAxisColor="#fff"
         yAxisColor="#fff"
         yAxisTextStyle={{color: 'black'}}
         xAxisLabelTextStyle={{color: 'black'}}
-        labelTextStyle={{color: '#00ff00', fontSize: 10}}
+        labelWidth={10}
       />
     </View>
   );

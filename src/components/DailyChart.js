@@ -62,7 +62,7 @@ const DailyChart = () => {
   );
 
   return (
-    <View style={{ padding: 20, alignItems: 'center',paddingTop:30,paddingBottom:30 }}>
+    <View style={{ padding: 20, alignItems: 'center'}}>
       <PieChart
         data={dailyData}
         donut
