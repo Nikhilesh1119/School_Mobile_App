@@ -39,7 +39,7 @@ const DailyChart = () => {
         style={{
           flexDirection: 'row',
           justifyContent: 'center',
-          marginVertical: 10,
+          marginVertical: 30,
         }}>
         <View
           style={{
@@ -62,7 +62,7 @@ const DailyChart = () => {
   );
 
   return (
-    <View style={{ padding: 20, alignItems: 'center' }}>
+    <View style={{ padding: 20, alignItems: 'center',paddingTop:30,paddingBottom:30 }}>
       <PieChart
         data={dailyData}
         donut

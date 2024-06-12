@@ -9,7 +9,7 @@ const MonthlyChart = () => {
     return {
       stacks: [
         {value: x, color: '#d91111'},
-        {value: 50 - x, color: '#e7e5f2'},
+        {value: 50 - x, color: '#fff'},
       ],
       label: day % 5 === 1 ? day.toString() : '',
     };
@@ -18,16 +18,18 @@ const MonthlyChart = () => {
   return (
     <View className="items-start py-[30] ">
       <BarChart
-        width={300}
+        width={370}
         height={400}
-        barWidth={13}
-        spacing={5}
+        barWidth={8}
+        spacing={4}
         dashGap={0}
         noOfSections={5}
         stepValue={5}
         // barBorderRadius={6}
         maxValue={50}
         stackData={monthlyData}
+        xAxisColor="#fff"
+        yAxisColor="#fff"
         yAxisTextStyle={{color: 'black'}}
         xAxisLabelTextStyle={{color: 'black'}}
         labelTextStyle={{color: '#00ff00', fontSize: 10}}

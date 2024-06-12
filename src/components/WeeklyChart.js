@@ -9,42 +9,36 @@ const WeeklyChart = () => {
     {
       stacks: [
         {value: 25, color: '#d91111'},
-        {value: 25, color: '#4c39a9'},
       ],
       label: 'Mon',
     },
     {
       stacks: [
         {value: 10, color: '#d91111'},
-        {value: 40, color: '#4c39a9'},
       ],
       label: 'Tue',
     },
     {
       stacks: [
         {value: 15, color: '#d91111'},
-        {value: 35, color: '#4c39a9'},
       ],
       label: 'Wed',
     },
     {
       stacks: [
         {value: 10, color: '#d91111'},
-        {value: 40, color: '#4c39a9'},
       ],
       label: 'Thu',
     },
     {
       stacks: [
         {value: 20, color: '#d91111'},
-        {value: 30, color: '#4c39a9'},
       ],
       label: 'Fri',
     },
     {
       stacks: [
         {value: 5, color: '#d91111'},
-        {value: 45, color: '#4c39a9'},
       ],
       label: 'Sat',
     },
@@ -55,20 +49,22 @@ const WeeklyChart = () => {
   };
 
   return (
-    <View className="items-start py-[30]">
+    <View className="items-start py-[30] bg-purple-50 rounded-lg">
       <BarChart
         width={300}
         height={400}
         rotateLabel={true}
-        dashGap={0}
-        barWidth={25}
-        spacing={20}
-        stepValue={5}
+        // dashGap={0}
+        rulesColor="#4c39a9"
+        barWidth={37}
+        spacing={11}
+        stepValue={10}
         maxValue={50}
         stackData={weeklyData}
+        xAxisColor="#fff"
+        yAxisColor="#fff"
         yAxisTextStyle={{color: 'black'}}
         xAxisLabelTextStyle={{color: 'black'}}
-        barBorderRadius={10}
         focusBarOnPress={true}
         onPressBar={index => handleBarPress(index)}
       />

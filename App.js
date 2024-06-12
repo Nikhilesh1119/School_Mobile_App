@@ -4,6 +4,6 @@ import Navigation from './src/navigation/Navigation';
 import DashboardScreen from './src/screens/DashboardScreen';
 
 export default function App() {
-  return <Navigation />;
-  // return <DashboardScreen />;
+  // return <Navigation />;
+  return <DashboardScreen />;
 }

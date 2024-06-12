@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -30,14 +30,16 @@ const AttendanceDashboard = () => {
 
   return (
     <ScrollView>
-      <View className="flex-1 p-5 bg-white">
-        <Text className="text-2xl font-bold mb-2.5 text-[#33005B]">
-          Attendance
-        </Text>
-        <Text className="text-xl mb-5 font-bold text-[#a491b7]">
-          31 May, 2024
-        </Text>
-        <View className="flex flex-row items-center px-2 mb-5 border border-gray-300 bg-gray-100 rounded-xl">
+      <View className="flex-1 py-5 bg-white">
+        <View className='flex px-5 flex-row justify-between items-center'>
+          <Text className="text-2xl font-bold mb-5 text-[#33005B]">
+            Attendance
+          </Text>
+          <Text className="text-xl mb-5 font-bold text-[#a491b7]">
+            31 May, 2024
+          </Text>
+        </View>
+        <View className="flex flex-row items-center mx-5 px-2 mb-5 border border-gray-300 bg-gray-100 rounded-xl">
           <Image source={search} className="h-[30] w-[30] text-gray-300" />
           <TextInput
             className="h-[50] px-2.5 text-black w-full"
@@ -46,7 +48,7 @@ const AttendanceDashboard = () => {
           />
         </View>
 
-        <View className="mb-6">
+        <View className="flex flex-row  justify-between mb-6 mx-5 py-2">
           <Text className="text-xl font-bold mb-1.5 text-[#a491b7]">
             Statistics
           </Text>
@@ -55,7 +57,7 @@ const AttendanceDashboard = () => {
           </Text>
         </View>
 
-        <View className="flex-row justify-around mb-6 bg-gray-100 rounded-xl py-2.5">
+        <View className="flex-row justify-around mb-6 mx-5 bg-gray-100 rounded-xl py-2.5">
           <TouchableOpacity
             className={`py-3 flex justify-center items-center w-[110] rounded-xl ${
               selectedView === 'Daily' ? 'bg-purple-700' : 'bg-gray-400'
@@ -79,7 +81,7 @@ const AttendanceDashboard = () => {
           </TouchableOpacity>
         </View>
         <View className="ml-2">
-          <Text className="text-xl font-bold mb-2 text-[#a491b7]">
+          <Text className="text-xl mx-5 font-bold mb-2 text-[#a491b7]">
             {selectedView}, 31 May 2024
           </Text>
           {renderChart()}
