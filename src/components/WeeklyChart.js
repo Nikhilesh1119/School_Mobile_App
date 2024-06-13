@@ -51,12 +51,12 @@ const WeeklyChart = () => {
   return (
     <View className="items-start py-[30] bg-purple-50 rounded-lg">
       <BarChart
-        width={300}
+        width={370}
         height={400}
         rotateLabel={true}
         rulesColor="#4c39a9"
-        barWidth={37}
-        spacing={11}
+        barWidth={40}
+        spacing={15}
         stepValue={10}
         maxValue={50}
         stackData={weeklyData}

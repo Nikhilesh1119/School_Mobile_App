@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -14,14 +14,19 @@ import {
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
-import profileback from "../assets/images/profileback.png";
+import profileback from '../assets/images/profileback.png';
 import contact from '../assets/images/contact.png';
 import editprofile from '../assets/images/editprofile.png';
 import laguage from '../assets/images/laguage.png';
 import mode from '../assets/images/mode.png';
 import help from '../assets/images/help.png';
+import {AuthContext} from '../context/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ProfileScreen({navigation}) {
+  const {logout,ClassName, SectionName} = useContext(AuthContext);
+  const teacherUserName = AsyncStorage.getItem('username');
+
   const [form, setForm] = useState({
     darkMode: false,
     emailNotifications: true,
@@ -56,8 +61,10 @@ export default function ProfileScreen({navigation}) {
             }}
             style={styles.profileAvatar}
           />
-          <Text style={styles.profileName}>John Doe</Text>
-          <Text style={styles.profileEmail}>Class Name and Section</Text>
+          <Text style={styles.profileName}>{}</Text>
+          <Text style={styles.profileEmail}>
+            {ClassName} - {SectionName}
+          </Text>
         </View>
       </ImageBackground>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -65,7 +72,11 @@ export default function ProfileScreen({navigation}) {
           <Text style={styles.sectionTitle}>Preferences</Text>
           <View style={styles.sectionBody}>
             <View style={[styles.rowWrapper, styles.rowFirst]}>
-              <TouchableOpacity onPress={() => {navigation.navigate("EditProfile")}} style={styles.row}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('EditProfile');
+                }}
+                style={styles.row}>
                 <View style={[styles.rowIcon, {}]}>
                   <Image source={editprofile} style={{width: 22, height: 22}} />
                 </View>
@@ -101,7 +112,7 @@ export default function ProfileScreen({navigation}) {
           </View>
         </View>
 
-        <View style={styles.section}>
+        <View style={styles.section} className="py-3">
           <Text style={styles.sectionTitle}>Notifications</Text>
           <View style={styles.sectionBody}>
             <View style={[styles.rowWrapper, styles.rowFirst]}>
@@ -131,6 +142,15 @@ export default function ProfileScreen({navigation}) {
                 <Text style={styles.rowLabel}>Contact Us</Text>
                 <View style={styles.rowSpacer} />
                 <FeatherIcon color="#C6C6C6" name="chevron-right" size={20} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.rowWrapper}>
+              <TouchableOpacity onPress={() => logout()} style={styles.row}>
+                <View style={[styles.rowIcon]}>
+                  <Image source={contact} style={{width: 22, height: 22}} />
+                </View>
+                <Text style={styles.rowLabel}>Logout</Text>
+                <View style={styles.rowSpacer} />
               </TouchableOpacity>
             </View>
           </View>

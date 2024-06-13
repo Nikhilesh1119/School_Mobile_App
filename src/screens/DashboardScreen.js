@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -11,8 +11,11 @@ import DailyChart from '../components/DailyChart';
 import WeeklyChart from '../components/WeeklyChart';
 import MonthlyChart from '../components/MonthlyChart';
 import search from '../assets/images/search.png';
+import {AuthContext} from '../context/AuthContext';
 
 const AttendanceDashboard = () => {
+  const {ClassName, SectionName} = useContext(AuthContext);
+
   const [selectedView, setSelectedView] = useState('Daily');
   const handleViewChange = view => {
     setSelectedView(view);
@@ -31,7 +34,7 @@ const AttendanceDashboard = () => {
   return (
     <ScrollView>
       <View className="flex-1 py-5 bg-white">
-        <View className='flex px-5 flex-row justify-between items-center'>
+        <View className="flex px-5 flex-row justify-between items-center">
           <Text className="text-2xl font-bold mb-5 text-[#33005B]">
             Attendance
           </Text>
@@ -53,7 +56,8 @@ const AttendanceDashboard = () => {
             Statistics
           </Text>
           <Text className="text-2xl font-bold mb-1.5 text-[#33005B]">
-            8th - A
+            {/* 8th - A */}
+            {ClassName}-{SectionName}
           </Text>
         </View>
 
@@ -80,7 +84,7 @@ const AttendanceDashboard = () => {
             <Text className="text-white">Monthly</Text>
           </TouchableOpacity>
         </View>
-        <View className="ml-2">
+        <View className="mx-2">
           <Text className="text-xl mx-5 font-bold mb-2 text-[#a491b7]">
             {selectedView}, 31 May 2024
           </Text>
