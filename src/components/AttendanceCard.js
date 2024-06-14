@@ -8,6 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import React, {useCallback, useState} from 'react';
+import user from '../assets/images/user.jpg'
 
 export default function AttendanceCard({
   item,
@@ -111,7 +112,7 @@ export default function AttendanceCard({
         ]}
         {...rest}>
         <Image
-          source={item.image}
+          source={item.image||user}
           style={{width: '100%', height: '100%', borderRadius: 30}}
         />
         {isfirst && startAttendance && (
@@ -169,7 +170,7 @@ export default function AttendanceCard({
             fontWeight: 700,
             fontFamily: 'Satoshi-Regular',
           }}>
-          {item.name}
+          {item.firstname}
           {', '}
           {item.bloodGroup}
         </Text>
@@ -194,7 +195,7 @@ export default function AttendanceCard({
             fontSize: 18,
             fontWeight: 400,
           }}>
-          PhoneNumber: {item.phoneNumber}
+          PhoneNumber: {item.phone}
         </Text>
         {isfirst && startAttendance && attendanceSelection()}
       </Animated.View>

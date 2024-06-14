@@ -24,9 +24,7 @@ import {AuthContext} from '../context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ProfileScreen({navigation}) {
-  const {logout,ClassName, SectionName} = useContext(AuthContext);
-  const teacherUserName = AsyncStorage.getItem('username');
-
+  const {logout, ClassName, SectionName} = useContext(AuthContext);
   const [form, setForm] = useState({
     darkMode: false,
     emailNotifications: true,
@@ -35,14 +33,19 @@ export default function ProfileScreen({navigation}) {
   });
 
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
-
+  const [username, setUserName] = useState('');
   const languages = ['English', 'Spanish', 'French', 'German', 'Chinese'];
 
   const handleLanguageSelect = language => {
     setForm({...form, language});
     setLanguageModalVisible(false);
   };
-
+  const teacherUserName = async () => {
+    setUserName(await AsyncStorage.getItem('username'));
+  };
+  useEffect(() => {
+    teacherUserName();
+  }, []);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#f6f6f6'}}>
       <ImageBackground
@@ -61,7 +64,7 @@ export default function ProfileScreen({navigation}) {
             }}
             style={styles.profileAvatar}
           />
-          <Text style={styles.profileName}>{}</Text>
+          <Text style={styles.profileName}>{username}</Text>
           <Text style={styles.profileEmail}>
             {ClassName} - {SectionName}
           </Text>

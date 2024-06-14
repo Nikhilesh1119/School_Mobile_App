@@ -47,7 +47,7 @@ export const AuthProvider = ({children}) => {
       try {
         // console.log(token);
         const decodedToken = jwtDecode(token);
-        console.log('dtl', decodedToken);
+        // console.log('dtl', decodedToken);
         setTeacherId(decodedToken.teacherId);
         setSectionId(decodedToken.sectionId);
         setClassId(decodedToken.classId);
