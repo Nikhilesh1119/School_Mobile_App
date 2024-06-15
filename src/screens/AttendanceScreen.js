@@ -31,130 +31,26 @@ export default function AttendanceScreen({setAttendanceStarted}) {
   const {height} = Dimensions.get('window');
   const [student, setStudent] = useState([]);
 
-  // const [data, setData] = useState([
-  //   {
-  //     image: require('../assets/images/s1.jpg'),
-  //     rollNumber: 101,
-  //     name: 'Nikhilesh',
-  //     bloodGroup: 'O+',
-  //     phoneNumber: '9999999999',
-  //   },
-  //   {
-  //     image: require('../assets/images/s2.jpg'),
-  //     rollNumber: 102,
-  //     name: 'Kuldeep',
-  //     bloodGroup: 'A+',
-  //     phoneNumber: '9999988888',
-  //   },
-  //   {
-  //     image: require('../assets/images/s3.jpg'),
-  //     rollNumber: 103,
-  //     name: 'Jainam',
-  //     bloodGroup: 'B+',
-  //     phoneNumber: '9999977777',
-  //   },
-  //   {
-  //     image: require('../assets/images/s4.jpg'),
-  //     rollNumber: 104,
-  //     name: 'Ishika',
-  //     bloodGroup: 'O-',
-  //     phoneNumber: '9999966666',
-  //   },
-  //   {
-  //     image: require('../assets/images/s1.jpg'),
-  //     rollNumber: 106,
-  //     name: 'Jaydeep',
-  //     bloodGroup: 'AB+',
-  //     phoneNumber: '9999944444',
-  //   },
-  //   {
-  //     image: require('../assets/images/s2.jpg'),
-  //     rollNumber: 107,
-  //     name: 'Kunal',
-  //     bloodGroup: 'AB-',
-  //     phoneNumber: '9999955555',
-  //   },
-  //   {
-  //     image: require('../assets/images/s3.jpg'),
-  //     rollNumber: 108,
-  //     name: 'Mahendra',
-  //     bloodGroup: 'AB-',
-  //     phoneNumber: '9999955555',
-  //   },
-  //   {
-  //     image: require('../assets/images/s1.jpg'),
-  //     rollNumber: 109,
-  //     name: 'Himanshu',
-  //     bloodGroup: 'AB-',
-  //     phoneNumber: '9999955555',
-  //   },
-  //   {
-  //     image: require('../assets/images/s2.jpg'),
-  //     rollNumber: 110,
-  //     name: 'Jitu',
-  //     bloodGroup: 'AB-',
-  //     phoneNumber: '9999955555',
-  //   },
-  //   {
-  //     image: require('../assets/images/s3.jpg'),
-  //     rollNumber: 111,
-  //     name: 'Nitin',
-  //     bloodGroup: 'AB-',
-  //     phoneNumber: '9999955555',
-  //   },
-  //   {
-  //     image: require('../assets/images/s1.jpg'),
-  //     rollNumber: 112,
-  //     name: 'Narayan',
-  //     bloodGroup: 'AB-',
-  //     phoneNumber: '9999955555',
-  //   },
-  //   {
-  //     image: require('../assets/images/s1.jpg'),
-  //     rollNumber: 113,
-  //     name: 'Hariom',
-  //     bloodGroup: 'AB-',
-  //     phoneNumber: '9999955555',
-  //   },
-  //   {
-  //     image: require('../assets/images/s2.jpg'),
-  //     rollNumber: 114,
-  //     name: 'Gourav',
-  //     bloodGroup: 'AB-',
-  //     phoneNumber: '9999955555',
-  //   },
-  //   {
-  //     image: require('../assets/images/s3.jpg'),
-  //     rollNumber: 115,
-  //     name: 'Himesh',
-  //     bloodGroup: 'AB-',
-  //     phoneNumber: '9999955555',
-  //   },
-  //   {
-  //     image: require('../assets/images/s5.jpg'),
-  //     rollNumber: 116,
-  //     name: 'Muskan',
-  //     bloodGroup: 'AB-',
-  //     phoneNumber: '9999955555',
-  //   },
-  // ]);
-
   const swipe = useRef(new Animated.ValueXY()).current;
 
   const handleSwipeComplete = useCallback(
     direction => {
-      // const currentStudent = data[0];
       const currentStudent = student[0];
+      const attendanceRecord = {
+        firstname: currentStudent.firstname,
+        _id: currentStudent._id,
+        isPresent: direction === 1,
+      };
+
       if (direction === 1) {
-        setPresent(prev => [...prev, currentStudent]);
-        } else {
-          setAbsent(prev => [...prev, currentStudent]);
+        setPresent(prev => [...prev, attendanceRecord]);
+      } else {
+        setAbsent(prev => [...prev, attendanceRecord]);
       }
-      // setData(prevState => prevState.slice(1));
-      setStudent(prevState => prevState.slice(1));
+
+      setStudent(prev => prev.slice(1));
       swipe.setValue({x: 0, y: 0});
     },
-    // [data, swipe],
     [student, swipe],
   );
 
@@ -318,20 +214,29 @@ export default function AttendanceScreen({setAttendanceStarted}) {
     // ]);
   };
 
-  const handleSaveAndProceed = useCallback(() => {
+  const handleSaveAndProceed = useCallback(async () => {
     setStartAttendance(false);
     setAttendanceStarted(false);
-    markAttendance();
+    await markAttendance();
   }, [setAttendanceStarted]);
+
   const markAttendance = async () => {
-    console.log(present.length,absent.length);
-    console.log(present,absent);
-    // const res = await axiosClient.post(
-    //   `/attendance/mark-attendance/${SectionId}`,
-    //   {present, absent},
-    // );
-    console.log(res.data);
+    try {
+      console.log(present, absent);
+      if (present.length > 0 || absent.length > 0) {
+        const res = await axiosClient.post(
+          `/attendance/mark-attendance/${SectionId}`,
+          {present, absent},
+        );
+        console.log('Attendance marked:', res.data);
+      } else {
+        console.log(`can't mark Attendance`);
+      }
+    } catch (error) {
+      console.error('Error marking attendance:', error);
+    }
   };
+
   const getStudent = async () => {
     try {
       const res = await axiosClient.get(`/student/student-list/${SectionId}`);
@@ -349,24 +254,6 @@ export default function AttendanceScreen({setAttendanceStarted}) {
   return (
     <View className="flex h-screen bg-white">
       <View className="flex">
-        {/* {data
-          .map((item, index) => {
-            let isfirst = index === 0;
-            let dragHandlers = isfirst ? panResponser.panHandlers : {};
-            return (
-              <AttendanceCard
-                item={item}
-                isfirst={isfirst}
-                key={index}
-                swipe={swipe}
-                startAttendance={startAttendance}
-                onStartAttendance={handleStartAttendance}
-                onCancleAttendance={reAttendance}
-                {...dragHandlers}
-              />
-            );
-          })
-          .reverse()} */}
         {student
           .map((item, index) => {
             let isfirst = index === 0;
@@ -476,7 +363,144 @@ export default function AttendanceScreen({setAttendanceStarted}) {
           </ScrollView>
         </View>
       )}
-      {/* {data.length === 0 && (
+    </View>
+  );
+}
+
+// {
+
+//   const [data, setData] = useState([
+//       {
+//           image: require('../assets/images/s1.jpg'),
+//     rollNumber: 101,
+//     name: 'Nikhilesh',
+//     bloodGroup: 'O+',
+//     phoneNumber: '9999999999',
+//   },
+//   {
+//     image: require('../assets/images/s2.jpg'),
+//     rollNumber: 102,
+//     name: 'Kuldeep',
+//     bloodGroup: 'A+',
+//     phoneNumber: '9999988888',
+//   },
+//   {
+//     image: require('../assets/images/s3.jpg'),
+//     rollNumber: 103,
+//     name: 'Jainam',
+//     bloodGroup: 'B+',
+//     phoneNumber: '9999977777',
+//   },
+//   {
+//     image: require('../assets/images/s4.jpg'),
+//     rollNumber: 104,
+//     name: 'Ishika',
+//     bloodGroup: 'O-',
+//     phoneNumber: '9999966666',
+//   },
+//   {
+//       image: require('../assets/images/s1.jpg'),
+//     rollNumber: 106,
+//     name: 'Jaydeep',
+//     bloodGroup: 'AB+',
+//     phoneNumber: '9999944444',
+//   },
+//   {
+//     image: require('../assets/images/s2.jpg'),
+//     rollNumber: 107,
+//     name: 'Kunal',
+//     bloodGroup: 'AB-',
+//     phoneNumber: '9999955555',
+//   },
+//   {
+//     image: require('../assets/images/s3.jpg'),
+//     rollNumber: 108,
+//     name: 'Mahendra',
+//     bloodGroup: 'AB-',
+//     phoneNumber: '9999955555',
+//   },
+//   {
+//       image: require('../assets/images/s1.jpg'),
+//     rollNumber: 109,
+//     name: 'Himanshu',
+//     bloodGroup: 'AB-',
+//     phoneNumber: '9999955555',
+//   },
+//   {
+//     image: require('../assets/images/s2.jpg'),
+//     rollNumber: 110,
+//     name: 'Jitu',
+//     bloodGroup: 'AB-',
+//     phoneNumber: '9999955555',
+//   },
+//   {
+//     image: require('../assets/images/s3.jpg'),
+//     rollNumber: 111,
+//     name: 'Nitin',
+//     bloodGroup: 'AB-',
+//     phoneNumber: '9999955555',
+//   },
+//   {
+//     image: require('../assets/images/s1.jpg'),
+//     rollNumber: 112,
+//     name: 'Narayan',
+//     bloodGroup: 'AB-',
+//     phoneNumber: '9999955555',
+//   },
+//   {
+//       image: require('../assets/images/s1.jpg'),
+//       rollNumber: 113,
+//       name: 'Hariom',
+//     bloodGroup: 'AB-',
+//     phoneNumber: '9999955555',
+//   },
+//   {
+//     image: require('../assets/images/s2.jpg'),
+//     rollNumber: 114,
+//     name: 'Gourav',
+//     bloodGroup: 'AB-',
+//     phoneNumber: '9999955555',
+//   },
+//   {
+//     image: require('../assets/images/s3.jpg'),
+//     rollNumber: 115,
+//     name: 'Himesh',
+//     bloodGroup: 'AB-',
+//     phoneNumber: '9999955555',
+//   },
+//   {
+//     image: require('../assets/images/s5.jpg'),
+//     rollNumber: 116,
+//     name: 'Muskan',
+//     bloodGroup: 'AB-',
+//     phoneNumber: '9999955555',
+//   },
+// ]);
+// }
+
+{
+  /* {data
+          .map((item, index) => {
+            let isfirst = index === 0;
+            let dragHandlers = isfirst ? panResponser.panHandlers : {};
+            return (
+              <AttendanceCard
+                item={item}
+                isfirst={isfirst}
+                key={index}
+                swipe={swipe}
+                startAttendance={startAttendance}
+                onStartAttendance={handleStartAttendance}
+                onCancleAttendance={reAttendance}
+                {...dragHandlers}
+              />
+            );
+          })
+          .reverse()} */
+}
+
+{
+  /* {data.length === 0 && (
         <View style={{height: height - 90}}>
           <ScrollView>
             {absent.length > 0 && (
@@ -565,7 +589,5 @@ export default function AttendanceScreen({setAttendanceStarted}) {
             </TouchableOpacity>
           </ScrollView>
         </View>
-      )} */}
-    </View>
-  );
+      )} */
 }

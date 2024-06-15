@@ -43,8 +43,8 @@ export default function EditProfile() {
     lastname: '',
     dob: '',
     phone: '',
-    bloodGroup: 'O-',
-    gender: 'Male',
+    bloodGroup: '',
+    gender: '',
     university: '',
     degree: '',
   });
