@@ -19,7 +19,6 @@ export default function AttendancePage({setAttendanceStarted}) {
   const [student, setStudent] = useState([]);
 
   const swipe = useRef(new Animated.ValueXY()).current;
-
   const handleSwipeComplete = useCallback(
     direction => {
       const currentStudent = student[0];
@@ -103,10 +102,11 @@ export default function AttendancePage({setAttendanceStarted}) {
   }, []);
 
   return (
-    <View className="flex h-screen bg-white">
+    <View className="flex h-screen bg-gray-100">
       <View className="flex">
         {student
           .map((item, index) => {
+            // item.rollNo = index + 1;
             let isfirst = index === 0;
             let dragHandlers = isfirst ? panResponser.panHandlers : {};
             return (

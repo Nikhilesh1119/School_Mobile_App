@@ -184,11 +184,8 @@ export default function ProfileScreen({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 0,
-    paddingHorizontal: 0,
     flexGrow: 1,
     flexShrink: 1,
-    flexBasis: 0,
   },
   image: {
     width: '100%',
@@ -203,7 +200,6 @@ const styles = StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 24,
     marginBottom: 12,
-    marginTop: 0,
   },
   subtitle: {
     fontSize: 15,
@@ -243,7 +239,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Satoshi',
   },
   profileClass: {
-    marginTop: 55,
+    marginTop: 65,
     fontSize: 14,
     fontWeight: '500',
     color: 'black',
@@ -294,9 +290,6 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: '#e3e3e3',
   },
-  rowFirst: {
-    borderTopWidth: 0,
-  },
   rowIcon: {
     width: 30,
     height: 30,
@@ -314,7 +307,6 @@ const styles = StyleSheet.create({
   rowSpacer: {
     flexGrow: 1,
     flexShrink: 1,
-    flexBasis: 0,
   },
   rowValue: {
     fontSize: 14,

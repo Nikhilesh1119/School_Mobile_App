@@ -35,7 +35,6 @@ const validationSchema = Yup.object().shape({
 
 export default function EditProfile() {
   const navigation = useNavigation();
-  // const toast = useToast();
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
   const {teacherId} = useContext(AuthContext);
