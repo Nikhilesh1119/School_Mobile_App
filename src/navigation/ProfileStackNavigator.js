@@ -4,6 +4,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import ProfileScreen from '../screens/ProfileScreen';
 import EditProfile from '../components/EditProfile';
+// import EditProfile from '../components/EditProfile';
+
 
 const Stack = createNativeStackNavigator();
 

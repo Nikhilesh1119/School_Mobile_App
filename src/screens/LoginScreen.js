@@ -14,7 +14,7 @@ import BottomSheet from '@gorhom/bottom-sheet';
 import LoginForm from '../components/LoginForm';
 
 function LoginScreen() {
-  const snapPoints = useMemo(() => ['60%'], []);
+  const snapPoints = useMemo(() => ['100%'], []);
   const bottomSheetRef = useRef(null);
 
   const handleClosePress = () => {
@@ -38,16 +38,17 @@ function LoginScreen() {
           <TouchableOpacity
             className={styles.swipeContainer}
             onPress={handleOpenPress}>
-            <Text style={styles.swipeText}>Click to Login</Text>
+            <Text style={(styles.swipeText, {fontFamily: 'Satoshi'})}>
+              Click to Login
+            </Text>
           </TouchableOpacity>
           <BottomSheet
             enablePanDownToClose={true}
             snapPoints={snapPoints}
             index={-1}
-            ref={bottomSheetRef}
-            backgroundStyle={{borderRadius: 50}}>
+            ref={bottomSheetRef}>
             <View style={styles.contentContainer}>
-              <LoginForm/>
+              <LoginForm />
             </View>
           </BottomSheet>
         </View>
