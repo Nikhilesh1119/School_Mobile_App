@@ -48,6 +48,7 @@ import LoginScreen from '../screens/LoginScreen';
 import {AuthContext} from '../context/AuthContext';
 import {View, ActivityIndicator} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import AttendanceScreen from '../screens/AttendanceScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -78,6 +79,11 @@ export default function Navigation() {
             name="Home"
             options={{headerShown: false}}
             component={HomeScreen}
+          />
+          <Stack.Screen
+            name="Attendance"
+            options={{headerShown: false}}
+            component={AttendanceScreen}
           />
         </Stack.Navigator>
       )}

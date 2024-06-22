@@ -39,10 +39,10 @@ export const AuthProvider = ({children}) => {
     isLogin();
   }, []);
 
-  const login = async (token, username) => {
+  const login = async (token, firstname) => {
     try {
       await AsyncStorage.setItem('accessToken', token);
-      await AsyncStorage.setItem('username', username);
+      await AsyncStorage.setItem('firstname', firstname);
       setAccessToken(token);
       try {
         // console.log(token);
@@ -66,7 +66,7 @@ export const AuthProvider = ({children}) => {
   const logout = async () => {
     try {
       await AsyncStorage.removeItem('accessToken');
-      await AsyncStorage.removeItem('username');
+      await AsyncStorage.removeItem('firstname');
       setAccessToken(null);
       setTeacherId(null);
       setSectionId(null);

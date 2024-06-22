@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import React, {useCallback, useState} from 'react';
-import user from '../assets/images/user.jpg'
+import user from '../assets/images/user.jpg';
 
 export default function AttendanceCard({
   item,
@@ -89,7 +89,9 @@ export default function AttendanceCard({
             borderRadius: 30,
             backgroundColor: '#4E2973',
           }}>
-          <Text style={{color: 'white', fontSize: 16}}>Cancel Attendance</Text>
+          <Text style={{color: 'white', fontSize: 16, fontFamily: 'Satoshi'}}>
+            Cancel Attendance
+          </Text>
         </TouchableOpacity>
       )}
 
@@ -112,7 +114,7 @@ export default function AttendanceCard({
         ]}
         {...rest}>
         <Image
-          source={item.image||user}
+          source={item.image || user}
           style={{width: '100%', height: '100%', borderRadius: 30}}
         />
         {isfirst && startAttendance && (
@@ -153,7 +155,7 @@ export default function AttendanceCard({
                 className="bg-[#4E2973] px-5 py-2 h-[50] ">
                 <Text
                   className="text-white text-lg "
-                  style={{fontFamily: 'Satoshi-Regular'}}>
+                  style={{fontFamily: 'Satoshi'}}>
                   Start Attendance
                 </Text>
               </TouchableOpacity>
@@ -168,7 +170,7 @@ export default function AttendanceCard({
             color: '#fff',
             fontSize: 28,
             fontWeight: 700,
-            fontFamily: 'Satoshi-Regular',
+            fontFamily: 'Satoshi',
           }}>
           {item.firstname}
           {', '}
@@ -181,7 +183,7 @@ export default function AttendanceCard({
             left: 20,
             color: '#fff',
             fontSize: 18,
-            fontFamily: 'Satoshi-Regular',
+            fontFamily: 'Satoshi',
             fontWeight: 400,
           }}>
           RollNumber: {item.rollNumber}
@@ -194,6 +196,7 @@ export default function AttendanceCard({
             color: '#fff',
             fontSize: 18,
             fontWeight: 400,
+            fontFamily: 'Satoshi',
           }}>
           PhoneNumber: {item.phone}
         </Text>
@@ -214,7 +217,7 @@ const AttendanceChoice = ({type}) => {
           borderColor: type == 'Present' ? '#01FF84' : '#F6006B',
           paddingLeft: 10,
           paddingRight: 10,
-          fontFamily: 'Satoshi-Regular',
+          fontFamily: 'Satoshi',
         }}>
         {type}
       </Text>

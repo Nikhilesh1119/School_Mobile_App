@@ -21,7 +21,8 @@ import India from '../assets/images/India.png';
 import DatePicker from 'react-native-date-picker';
 import {AuthContext} from '../context/AuthContext';
 import {axiosClient} from '../services/axiosClient';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+// import {useToast} from 'react-native-toast-notifications';
 
 const validationSchema = Yup.object().shape({
   firstname: Yup.string().required('First name is required'),
@@ -34,7 +35,7 @@ const validationSchema = Yup.object().shape({
 
 export default function EditProfile() {
   const navigation = useNavigation();
-
+  // const toast = useToast();
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
   const {teacherId} = useContext(AuthContext);
@@ -91,8 +92,15 @@ export default function EditProfile() {
               );
               // console.log(res.data.result);
               ToastAndroid.show(res.data.result, ToastAndroid.LONG);
+              // toast.show(res.data.result, {
+              //   type:'default',
+              //   placement: 'bottom',
+              //   duration: 1000,
+              //   offset: 50,
+              //   animationType: ' zoom-in',
+              // });
               setTimeout(() => {
-                navigation.navigate('Profile')
+                navigation.navigate('Profile');
               }, 1000);
             } catch (error) {
               ToastAndroid.show(`can't update profile`, ToastAndroid.LONG);
@@ -132,7 +140,9 @@ export default function EditProfile() {
                 <TouchableOpacity
                   onPress={() => setOpen(true)}
                   style={styles.inputText}>
-                  <Text className="text-black">
+                  <Text
+                    className="text-black text-sm "
+                    style={{fontFamily: 'Satoshi'}}>
                     {values.dob ? values.dob : 'MM/DD/YYYY'}
                   </Text>
                 </TouchableOpacity>
@@ -199,7 +209,11 @@ export default function EditProfile() {
                       setFieldValue('gender', itemValue)
                     }
                     style={styles.picker}>
-                    <Picker.Item label="Female" value="Female" />
+                    <Picker.Item
+                      label="Female"
+                      value="Female"
+                      style={{fontFamily: 'Satoshi'}}
+                    />
                     <Picker.Item label="Male" value="Male" />
                     <Picker.Item label="Other" value="Other" />
                     <Picker.Item
@@ -284,6 +298,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#000',
     marginLeft: 5,
+    fontFamily: 'Satoshi',
   },
   inputContainer: {
     borderWidth: 1,
@@ -294,15 +309,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   label: {
-    fontSize: 12,
+    fontSize: 10,
     color: '#1a1a1a',
+    fontWeight: 'bold',
   },
   inputText: {
     fontSize: 14,
     color: '#1a1a1a',
     marginTop: 5,
     height: 40,
-    marginLeft: 10, // Adjust this height to ensure the TextInput is visible
+    marginLeft: 10,
+    fontFamily: 'Satoshi',
   },
   dateContainer: {
     flexDirection: 'row',
@@ -354,6 +371,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: '100%',
     color: 'black',
+    fontFamily: 'Satoshi',
   },
   updateButton: {
     justifyContent: 'center',
@@ -365,8 +383,9 @@ const styles = StyleSheet.create({
   },
   updateButtonText: {
     color: '#f5f5f5',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: 'Satoshi',
   },
   footer: {
     justifyContent: 'center',

@@ -33,18 +33,18 @@ export default function ProfileScreen({navigation}) {
   });
 
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
-  const [username, setUserName] = useState('');
+  const [firstname, setFirstName] = useState('');
   const languages = ['English', 'Spanish', 'French', 'German', 'Chinese'];
 
   const handleLanguageSelect = language => {
     setForm({...form, language});
     setLanguageModalVisible(false);
   };
-  const teacherUserName = async () => {
-    setUserName(await AsyncStorage.getItem('username'));
+  const teacherFirstName = async () => {
+    setFirstName(await AsyncStorage.getItem('firstname'));
   };
   useEffect(() => {
-    teacherUserName();
+    teacherFirstName();
   }, []);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#f6f6f6'}}>
@@ -54,7 +54,11 @@ export default function ProfileScreen({navigation}) {
         style={styles.image}>
         <View style={styles.overlay} />
         <View style={styles.header}>
-          <Text style={styles.title}>Coordinator Profile</Text>
+          <Text
+            className="font-bold text-xl mb-2 mt-5 text-white text-center justify-center"
+            style={{fontFamily: 'Satoshi'}}>
+            Coordinator Profile
+          </Text>
         </View>
         <View style={styles.profile}>
           <Image
@@ -64,9 +68,9 @@ export default function ProfileScreen({navigation}) {
             }}
             style={styles.profileAvatar}
           />
-          <Text style={styles.profileName}>{username}</Text>
-          <Text style={styles.profileEmail}>
-            {ClassName} - {SectionName}
+          <Text style={styles.profileName}>{firstname}</Text>
+          <Text style={styles.profileClass}>
+            Class Coordinator- {ClassName}-{SectionName}
           </Text>
         </View>
       </ImageBackground>
@@ -80,7 +84,7 @@ export default function ProfileScreen({navigation}) {
                   navigation.navigate('EditProfile');
                 }}
                 style={styles.row}>
-                <View style={[styles.rowIcon, {}]}>
+                <View style={[styles.rowIcon]}>
                   <Image source={editprofile} style={{width: 22, height: 22}} />
                 </View>
                 <Text style={styles.rowLabel}>Edit profile</Text>
@@ -119,11 +123,7 @@ export default function ProfileScreen({navigation}) {
           <Text style={styles.sectionTitle}>Notifications</Text>
           <View style={styles.sectionBody}>
             <View style={[styles.rowWrapper, styles.rowFirst]}>
-              <TouchableOpacity
-                onPress={() => {
-                  // handle onPress
-                }}
-                style={styles.row}>
+              <TouchableOpacity style={styles.row}>
                 <View style={[styles.rowIcon]}>
                   <Image source={help} style={{width: 22, height: 22}} />
                 </View>
@@ -134,11 +134,7 @@ export default function ProfileScreen({navigation}) {
             </View>
 
             <View style={styles.rowWrapper}>
-              <TouchableOpacity
-                onPress={() => {
-                  // handle onPress
-                }}
-                style={styles.row}>
+              <TouchableOpacity style={styles.row}>
                 <View style={[styles.rowIcon]}>
                   <Image source={contact} style={{width: 22, height: 22}} />
                 </View>
@@ -201,22 +197,13 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adjust opacity by changing the alpha value
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   header: {
     paddingLeft: 24,
     paddingRight: 24,
     marginBottom: 12,
     marginTop: 0,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 6,
-    textAlign: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
   },
   subtitle: {
     fontSize: 15,
@@ -233,15 +220,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: 'black',
     height: 80,
-    borderTopLeftRadius: 60, // Adjust this value to make the curve more or less pronounced
-    borderTopRightRadius: 60, // Adjust this value to make the curve more or less pronounced
+    borderTopLeftRadius: 60,
+    borderTopRightRadius: 60,
   },
   profileAvatar: {
     width: 110,
     height: 110,
     borderRadius: 9999,
     position: 'absolute',
-    top: 5, // Adjust the position to move the avatar up
     zIndex: 2,
   },
   profileName: {
@@ -254,15 +240,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 60,
     zIndex: 2,
+    fontFamily: 'Satoshi',
   },
-  profileEmail: {
+  profileClass: {
     marginTop: 55,
-    fontSize: 16,
-    fontWeight: '400',
+    fontSize: 14,
+    fontWeight: '500',
     color: 'black',
     position: 'absolute',
     top: 85,
     zIndex: 2,
+    fontFamily: 'Satoshi',
   },
   scrollViewContent: {
     paddingTop: 100,
@@ -278,6 +266,7 @@ const styles = StyleSheet.create({
     color: '#a7a7a7',
     textTransform: 'uppercase',
     letterSpacing: 1.2,
+    fontFamily: 'Satoshi',
   },
   sectionBody: {
     paddingLeft: 24,
@@ -317,9 +306,10 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   rowLabel: {
-    fontSize: 17,
+    fontSize: 14,
     fontWeight: '500',
     color: '#000',
+    fontFamily: 'Satoshi',
   },
   rowSpacer: {
     flexGrow: 1,
@@ -327,10 +317,11 @@ const styles = StyleSheet.create({
     flexBasis: 0,
   },
   rowValue: {
-    fontSize: 17,
+    fontSize: 14,
     fontWeight: '500',
     color: '#8B8B8B',
     marginRight: 4,
+    fontFamily: 'Satoshi',
   },
   modalContainer: {
     flex: 1,
@@ -350,13 +341,15 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginBottom: 10,
     textAlign: 'center',
+    fontFamily: 'Satoshi',
   },
   languageOption: {
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
   languageText: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#333',
+    fontFamily: 'Satoshi',
   },
 });

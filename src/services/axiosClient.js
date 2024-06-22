@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // // const navigation = useNavigation();
 
 export const axiosClient = axios.create({
-  baseURL: 'http://192.168.238.214:4000',
+  baseURL: 'http://192.168.152.214:4000',
 });
 
 axiosClient.interceptors.request.use(
@@ -28,6 +28,9 @@ axiosClient.interceptors.response.use(
       AsyncStorage.removeItem('userToken');
       // navigation.navigate('Login');
     }
+    // if (error.response) {
+    //   return Promise.reject(error);
+    // }
     return Promise.reject(error);
   },
 );

@@ -42,11 +42,23 @@
 import React from 'react';
 import {AuthProvider} from './src/context/AuthContext';
 import Navigation from './src/navigation/Navigation';
+import {ToastProvider} from 'react-native-toast-notifications';
+import {Text, View} from 'react-native';
+import 'react-native-gesture-handler';
 
 export default function App() {
   return (
     <AuthProvider>
-      <Navigation />
+      <ToastProvider
+        renderType={{
+          white: toast => (
+            <View className="bg-black p-[15]">
+              <Text className="text-white">{toast.message}</Text>
+            </View>
+          ),
+        }}>
+        <Navigation />
+      </ToastProvider>
     </AuthProvider>
   );
 }
