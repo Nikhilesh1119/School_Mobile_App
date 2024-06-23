@@ -1,30 +1,13 @@
 const colors = {
-
-  PRIMARY: '#74FE99',
-  PRIMARY_1: '#F67568',
-  PRIMARY_2: '#E43046',
-
-  SECONDARY: '#00C9FF',
-  SECONDARY_1: '#D6DDF2',
-  SECONDARY_2: '#001C5B',
-  SECONDARY_3: '#031340',
-  SECONDARY_4: '#CEE0FD',
-  SECONDARY_5: '#052069',
-
   WHITE: '#FFFFFF',
   BLACK: '#000000',
-
-  DARK_GRAY: '#323140',
-  MID_GRAY: '#ABABAB',
-
-  SUCCESS: '#00A55A',
-  INFO: '#1A48E2',
-  WARNING: '#FFA430',
-  ERROR: '#FF454B',
-
-  LABEL_COLOR: '#CACACA',
-  ERROR:"#FF4D4F",
-  BLUE:'#RFRFERE'
+  COLOR_1:'rgba(78, 41, 115, 1)',
+  COLOR_2:'#D91111',
+  COLOR_3:'#2DBEB1',
+  COLOR_4:'rgba(78, 41, 115, 0.5)',
+  COLOR_5:'#0F0616',
+  COLOR_5:'#D9D9D9',
+  COLOR_6:'#FAFAFA',
 };
 
 export default colors;
