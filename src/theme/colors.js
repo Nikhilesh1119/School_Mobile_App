@@ -1,0 +1,30 @@
+const colors = {
+
+  PRIMARY: '#74FE99',
+  PRIMARY_1: '#F67568',
+  PRIMARY_2: '#E43046',
+
+  SECONDARY: '#00C9FF',
+  SECONDARY_1: '#D6DDF2',
+  SECONDARY_2: '#001C5B',
+  SECONDARY_3: '#031340',
+  SECONDARY_4: '#CEE0FD',
+  SECONDARY_5: '#052069',
+
+  WHITE: '#FFFFFF',
+  BLACK: '#000000',
+
+  DARK_GRAY: '#323140',
+  MID_GRAY: '#ABABAB',
+
+  SUCCESS: '#00A55A',
+  INFO: '#1A48E2',
+  WARNING: '#FFA430',
+  ERROR: '#FF454B',
+
+  LABEL_COLOR: '#CACACA',
+  ERROR:"#FF4D4F",
+  BLUE:'#RFRFERE'
+};
+
+export default colors;

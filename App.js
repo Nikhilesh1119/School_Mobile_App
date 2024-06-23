@@ -1,64 +1,36 @@
-// /* eslint-disable prettier/prettier */
-// import React, {useContext} from 'react';
-// import Navigation from './src/navigation/Navigation';
-// import DashboardScreen from './src/screens/DashboardScreen';
-// import { AuthProvider } from './src/context/AuthContext';
-
-// export default function App() {
-//   return (
-//     <AuthProvider>
-//       <Navigation />
-//     </AuthProvider>
-//   );
-//   // return <DashboardScreen />;
-// }
-
-// import React, { useEffect } from 'react';
-// import { AuthProvider } from './src/context/AuthContext';
-// import { NavigationProvider, useNavigationContext } from './src/context/NavigationContext';
-// import Navigation from './src/navigation/Navigation';
-// import { setupInterceptors } from './src/services/axiosClient';
-
-// const AppContent = () => {
-//   const { navigate } = useNavigationContext();
-
-//   useEffect(() => {
-//     setupInterceptors(navigate);
-//   }, [navigate]);
-
-//   return <Navigation />;
-// };
-
-// export default function App() {
-//   return (
-//     <AuthProvider>
-//       <NavigationProvider>
-//         <AppContent />
-//       </NavigationProvider>
-//     </AuthProvider>
-//   );
-// }
-
-import React from 'react';
+import React, {useEffect} from 'react';
 import {AuthProvider} from './src/context/AuthContext';
 import Navigation from './src/navigation/Navigation';
 import {ToastProvider} from 'react-native-toast-notifications';
 import {Text, View} from 'react-native';
 import 'react-native-gesture-handler';
+import Orientation from 'react-native-orientation-locker';
+import {I18nextProvider} from 'react-i18next';
+import i18n from './src/locale/i18n';
 
 export default function App() {
+  useEffect(() => {
+    // Lock the orientation to portrait on component mount
+    Orientation.lockToPortrait();
+    // Optionally, unlock orientation on component unmount
+    return () => {
+      // Orientation.unlockAllOrientations();
+    };
+  }, []);
   return (
     <AuthProvider>
-      <ToastProvider
-        renderType={{
-          white: toast => (
-            <View style={{backgroundColor:'black',padding:15}}>
-              <Text style={{color:'white'}}>{toast.message}</Text>
-            </View>
-          ),
-        }}>
-        <Navigation />
-      </ToastProvider>
+      <I18nextProvider i18n={i18n}>
+        <ToastProvider
+          renderType={{
+            white: toast => (
+              <View style={{backgroundColor: 'black', padding: 15}}>
+                <Text style={{color: 'white'}}>{toast.message}</Text>
+              </View>
+            ),
+          }}>
+          <Navigation />
+        </ToastProvider>
+      </I18nextProvider>
     </AuthProvider>
   );
 }
