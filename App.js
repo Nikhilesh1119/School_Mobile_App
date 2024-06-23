@@ -52,8 +52,8 @@ export default function App() {
       <ToastProvider
         renderType={{
           white: toast => (
-            <View className="bg-black p-[15]">
-              <Text className="text-white">{toast.message}</Text>
+            <View style={{backgroundColor:'black',padding:15}}>
+              <Text style={{color:'white'}}>{toast.message}</Text>
             </View>
           ),
         }}>
