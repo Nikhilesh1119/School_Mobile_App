@@ -89,7 +89,9 @@ export default function AttendancePage({setAttendanceStarted}) {
 
   const getStudent = async () => {
     try {
-      const res = await axiosClient.get(`/student/student-list/${SectionId}`);
+      const res = await axiosClient.get(
+        `/student/section-students/${SectionId}`,
+      );
       // console.log(res.data.result.studentList);
       setStudent(res.data.result.studentList);
     } catch (error) {
@@ -102,8 +104,8 @@ export default function AttendancePage({setAttendanceStarted}) {
   }, []);
 
   return (
-    <View className="flex h-screen bg-gray-100">
-      <View className="flex">
+    <View style={{display: 'flex', height: '100%'}}>
+      <View style={{display: 'flex'}}>
         {student
           .map((item, index) => {
             // item.rollNo = index + 1;

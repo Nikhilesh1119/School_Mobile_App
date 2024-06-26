@@ -3,6 +3,7 @@ import {View, Text} from 'react-native';
 import {PieChart} from 'react-native-gifted-charts';
 import {axiosClient} from '../services/axiosClient';
 import {AuthContext} from '../context/AuthContext';
+import {Fonts} from '../theme/fonts';
 
 const DailyChart = () => {
   const {SectionId} = useContext(AuthContext);
@@ -104,7 +105,7 @@ const DailyChart = () => {
                 marginTop: 8,
                 color: 'black',
                 fontSize: 40,
-                fontWeight: 'bold',
+                fontFamily: Fonts.BOLD,
               }}>
               {totalStudents}
             </Text>
