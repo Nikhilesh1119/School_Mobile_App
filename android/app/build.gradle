@@ -73,7 +73,11 @@ android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
-
+    sourceSets {
+        main {
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/fonts']
+        }
+    }
     namespace "com.schoolandroid"
     defaultConfig {
         applicationId "com.schoolandroid"

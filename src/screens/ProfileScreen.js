@@ -50,7 +50,7 @@ export default function ProfileScreen({navigation}) {
     <SafeAreaView style={{flex: 1, backgroundColor: '#f6f6f6'}}>
       <ImageBackground
         source={profileback}
-        resizeMode="cover"
+        resizeMode="stretch"
         style={styles.image}>
         <View style={styles.overlay} />
         <View style={styles.header}>
@@ -74,6 +74,31 @@ export default function ProfileScreen({navigation}) {
           </Text>
         </View>
       </ImageBackground>
+      {/* <ImageBackground
+        source={profileback}
+        resizeMode="stretch"
+        style={styles.image}>
+        <View style={styles.header}>
+          <View style={styles.pickerContainer}>
+            <TouchableOpacity
+              onPress={() => setStudentModalVisible(true)}
+              style={styles.pickerTouchable}>
+              <Text style={styles.selectedStudent}>{firstname}</Text>
+              <Image source={downarrow} style={{ width: 24, height: 24 }} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.profile}>
+          <Image
+            alt=""
+            source={{
+              uri: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2.5&w=256&h=256&q=80',
+            }}
+            style={styles.profileAvatar}
+          />
+          <Text style={styles.profileName}>Class Name and Section</Text>
+        </View>
+      </ImageBackground> */}
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Preferences</Text>

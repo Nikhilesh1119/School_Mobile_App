@@ -207,6 +207,7 @@ export default function AttendanceList({
           `/attendance/mark-attendance/${SectionId}`,
           {present, absent},
         );
+        navigation.navigate('Attendance')
         ToastAndroid.show(res.data.result, ToastAndroid.LONG);
       } else {
         console.log("can't mark Attendance");

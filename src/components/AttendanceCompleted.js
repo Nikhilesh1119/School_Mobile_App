@@ -1,14 +1,25 @@
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 
 export default function AttendanceCompleted() {
   return (
-    <View className="flex justify-center items-center h-full">
-      <Text
-        className="text-black text-3xl items-center "
-        style={{fontFamily: 'Satoshi'}}>
-        AttendanceCompleted
-      </Text>
+    <View style={styles.container}>
+      <Text style={styles.message}>AttendanceCompleted</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+  },
+  message: {
+    color: 'black',
+    fontSize: 24,
+    textAlign: 'center',
+    fontFamily: 'Satoshi'
+  },
+});

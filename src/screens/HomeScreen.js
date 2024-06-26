@@ -7,9 +7,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import DashboardScreen from './DashboardScreen';
 import AttendanceScreen from './AttendanceScreen';
 import ProfileScreen from './ProfileScreen';
-import EditProfile from '../components/EditProfile';
-import ProfileStackNavigator from '../navigation/ProfileStackNavigator';
+import EditProfile from '@src/components/EditProfile';
+import ProfileStackNavigator from '@src/navigation/ProfileStackNavigator';
 import { TouchableOpacity } from 'react-native';
+import { scale } from 'react-native-size-matters';
+import { Colors } from '@src/theme/fonts';
 
 const dashboard = 'Dashboard';
 const attendance = 'Attendance';
@@ -40,19 +42,19 @@ export default function HomeScreen() {
             <Icon
               name={iconName}
               size={30}
-              color={focused ? 'purple' : color}
+              color={focused ? Colors.COLOR_7 : color}
             />
           );
         },
-        tabBarActiveTintColor: 'purple',
-        tabBarInactiveTintColor: 'grey',
+        tabBarActiveTintColor: Colors.COLOR_7,
+        tabBarInactiveTintColor: Colors.DARKGRAY,
         tabBarLabelStyle: {
-          paddingBottom: 10,
-          fontSize: 10,
+          paddingBottom: scale(10),
+          fontSize: scale(10),
         },
         tabBarStyle: {
-          padding: 10,
-          height: 70,
+          padding: scale(10),
+          height: scale(70),
         },
         tabBarButton: props =>
           attendanceStarted && route.name !== attendance ? null : (
