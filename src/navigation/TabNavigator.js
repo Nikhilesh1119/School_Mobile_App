@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import DashboardScreen from '@src/screens/DashboardScreen';
 import AttendanceScreen from '@src/screens//AttendanceScreen';
 import ProfileStackNavigator from '@src/navigation/ProfileStackNavigator';
-import {TouchableOpacity} from 'react-native';
+import {Image, TouchableOpacity} from 'react-native';
 import {scale} from 'react-native-size-matters';
 import {Colors} from '@src/theme/fonts';
 import {ROUTE} from './constant';
@@ -37,7 +37,6 @@ export default function TabStackNavigator() {
   // });
 
   return (
-    // <NavigationContainer>
     <Tab.Navigator
       initialRouteName={initialRoute}
       screenOptions={({route}) => ({

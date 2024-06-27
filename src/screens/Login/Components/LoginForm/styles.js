@@ -38,6 +38,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     maxHeight: scale(48),
     display: 'flex-1',
+    marginTop: scale(8),
   },
   welcomeTextPrimary: {
     fontSize: Size.font_24,
@@ -54,11 +55,16 @@ export const styles = StyleSheet.create({
     fontFamily: Fonts.REGULAR,
     fontSize: Size.font_14,
     lineHeight: scale(20),
+    marginTop: scale(8),
   },
   inputLabel: {
     fontSize: Size.font_14,
     color: Colors.COLOR_8,
     fontFamily: Fonts.BOLD,
+    marginTop: scale(8),
+  },
+  inputContainer: {
+    marginTop: scale(8),
   },
   input: {
     borderColor: Colors.GRAY,
@@ -74,6 +80,7 @@ export const styles = StyleSheet.create({
   errorText: {
     color: Colors.RED,
     fontFamily: Fonts.REGULAR,
+    marginTop: scale(4),
   },
   passwordInputContainer: {
     flexDirection: 'row',
@@ -82,6 +89,7 @@ export const styles = StyleSheet.create({
     height: scale(50),
     marginTop: scale(8),
     borderRadius: scale(14),
+    marginTop: scale(8),
   },
   passwordInput: {
     flex: 5 / 6,
@@ -100,11 +108,13 @@ export const styles = StyleSheet.create({
     fontSize: Size.font_14,
     textAlign: 'right',
     fontFamily: Fonts.BOLD,
+    marginTop: scale(10),
   },
   loginButton: {
     backgroundColor: Colors.COLOR_7,
     paddingVertical: scale(10),
     borderRadius: scale(24),
+    marginTop: scale(8),
   },
   loginButtonText: {
     color: Colors.WHITE,
