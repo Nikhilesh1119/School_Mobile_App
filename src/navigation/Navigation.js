@@ -1,92 +1,33 @@
-// /* eslint-disable prettier/prettier */
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import HomeScreen from '../screens/HomeScreen';
-// import LoginScreen from '../screens/LoginScreen';
-// import { useContext } from 'react';
-// import { AuthContext } from '../context/AuthContext';
-// import { View, ActivityIndicator } from 'react-native';
-
-// const Stack = createNativeStackNavigator();
-
-// export default function Navigation() {
-//   const { userToken, isLoading } = useContext(AuthContext);
-
-//   if (isLoading) {
-//     return (
-//       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//         <ActivityIndicator size="large" />
-//       </View>
-//     );
-//   }
-
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator>
-//         {userToken === null ? (
-//           <Stack.Screen
-//             name="Login"
-//             options={{ headerShown: false }}
-//             component={LoginScreen}
-//           />
-//         ) : (
-//           <Stack.Screen
-//             name="HomeScreen"
-//             options={{ headerShown: false }}
-//             component={HomeScreen}
-//           />
-//         )}
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// }
-
-import React, {useContext} from 'react';
+import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from '../screens/HomeScreen';
-import LoginScreen from '../screens/LoginScreen';
-import {AuthContext} from '../context/AuthContext';
-import {View, ActivityIndicator} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import AttendanceScreen from '../screens/AttendanceScreen';
+import {ROUTE} from '@src/navigation/constant';
+import Splash from '@src/navigation/splash';
+import AuthStackNavigator from '@src/navigation/AuthStackNavigator';
+import TabStackNavigator from '@src/navigation/TabNavigator';
 
 const Stack = createNativeStackNavigator();
 
 export default function Navigation() {
-  const {accessToken, isLoading} = useContext(AuthContext);
-
-  if (isLoading) {
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
-
   return (
     <NavigationContainer>
-      {accessToken === null ? (
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Login"
-            options={{headerShown: false}}
-            component={LoginScreen}
-          />
-        </Stack.Navigator>
-      ) : (
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            options={{headerShown: false}}
-            component={HomeScreen}
-          />
-          <Stack.Screen
-            name="Attendance"
-            options={{headerShown: false}}
-            component={AttendanceScreen}
-          />
-        </Stack.Navigator>
-      )}
+      <Stack.Navigator initialRouteName={ROUTE.SPLASH}>
+        <Stack.Screen
+          name={ROUTE.SPLASH}
+          options={{headerShown: false}}
+          component={Splash}
+        />
+        <Stack.Screen
+          name={ROUTE.AUTH}
+          options={{headerShown: false}}
+          component={AuthStackNavigator}
+        />
+        <Stack.Screen
+          name={ROUTE.TAB}
+          options={{headerShown: false}}
+          component={TabStackNavigator}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

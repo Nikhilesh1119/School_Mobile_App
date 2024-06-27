@@ -15,10 +15,8 @@ export default function AttendanceScreen({setAttendanceStarted}) {
         `attendance/check-attendance-marked/${SectionId}`,
       );
       if (res.data.result) {
-        // console.log(res.data.result);
         setIsTodayAttendance(false);
       } else {
-        // console.log(res.data.message);
         setIsTodayAttendance(true);
       }
     } catch (error) {

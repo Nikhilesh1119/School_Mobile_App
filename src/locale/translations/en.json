@@ -1,0 +1,33 @@
+{
+  "translation": {
+    "appName": "Teacher App",
+    "submitBtn": "Submit",
+    "backBtn": "Back",
+    "nextBtn": "Next",
+    "continueBtn": "Continue",
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel",
+    "appClose": "Hold on!', 'Are you sure you want to exit the app ?",
+    "coming_soon": "Coming soon",
+    "logout": {
+      "logoutLabel": "Logout",
+      "header": "Log Out",
+      "content": "Are you sure you want to log out ?"
+    },
+    "network": {
+      "notAvailable": "You don't have internet connection. Please check you internet connection."
+    },
+    "api": {
+      "apiError": "Something Went Wrong. Please try again.",
+      "apiError403": "Your login session has been expired. Please login.",
+      "noData": "No Data Found"
+    },
+    "splash": {
+      "header": "Teacher App"
+    },
+    "login":{
+      "clickToLogin": "Click To Login"
+    }
+  }
+}

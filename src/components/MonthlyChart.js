@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {BarChart} from 'react-native-gifted-charts';
 import {axiosClient} from '../services/axiosClient';
 import {AuthContext} from '../context/AuthContext';
@@ -48,21 +48,17 @@ const MonthlyChart = () => {
         xAxisColor="#fff"
         yAxisColor="#fff"
         yAxisTextStyle={{color: 'black'}}
-        xAxisLabelTextStyle={{color: 'black'}}
-        labelWidth={10}
-        renderTooltip={({item, index}) => (
-          <Text style={styles.label}>{item.label}</Text>
-        )}
       />
+      <View style={{display:'flex',flexDirection:'row', justifyContent:"space-evenly"}}>
+        <Text style={{color: 'black'}}>1</Text>
+        <Text style={{color: 'black'}}>6</Text>
+        <Text style={{color: 'black'}}>11</Text>
+        <Text style={{color: 'black'}}>16</Text>
+        <Text style={{color: 'black'}}>21</Text>
+        <Text style={{color: 'black'}}>26</Text>
+      </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  label: {
-    width: 20,
-    textAlign: 'center',
-  },
-});
 
 export default MonthlyChart;

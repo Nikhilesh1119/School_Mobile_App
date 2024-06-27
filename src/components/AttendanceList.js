@@ -185,6 +185,7 @@ import user from '../assets/images/user.jpg';
 import {axiosClient} from '../services/axiosClient';
 import {AuthContext} from '../context/AuthContext';
 import {useNavigation} from '@react-navigation/native';
+import {ROUTE} from '../navigation/constant';
 
 export default function AttendanceList({
   present,
@@ -207,6 +208,7 @@ export default function AttendanceList({
           `/attendance/mark-attendance/${SectionId}`,
           {present, absent},
         );
+        navigation.navigate(ROUTE.DASHBOARD);
         ToastAndroid.show(res.data.result, ToastAndroid.LONG);
       } else {
         console.log("can't mark Attendance");
