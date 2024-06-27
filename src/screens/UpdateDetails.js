@@ -16,6 +16,7 @@ import {axiosClient} from '@src/services/axiosClient';
 import {useNavigation} from '@react-navigation/native';
 import update from '@src/assets/images/update.gif';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {ROUTE} from '../navigation/constant';
 
 export default function UpdatePassword() {
   const [isLogin, setIsLogin] = React.useState(false);
@@ -42,18 +43,17 @@ export default function UpdatePassword() {
   });
 
   const handleSubmit = async values => {
-    // navigation.navigate('Home');
-    // console.log(values);
-    // const res=await axiosClient.post('teacher/auth-update',values)
-    // console.log(res);
+    console.log(values);
+    const res = await axiosClient.put('teacher/auth-update', values);
+    console.log(res.result);
     setIsLogin(true);
     setTimeout(() => {
-      navigation.navigate('Home');
+      navigation.navigate(ROUTE.TAB);
     }, 2000);
   };
 
   return (
-    <View>
+    <>
       {isLogin ? (
         <View
           style={{
@@ -175,7 +175,7 @@ export default function UpdatePassword() {
           </View>
         </>
       )}
-    </View>
+    </>
   );
 }
 

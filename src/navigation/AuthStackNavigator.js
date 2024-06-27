@@ -4,7 +4,7 @@ import HomeScreen from '@src/screens/HomeScreen';
 import LoginScreen from '@src/screens/Login/Container/index';
 import AttendanceScreen from '@src/screens/AttendanceScreen';
 import UpdateDetails from '@src/screens/UpdateDetails';
-import ForgotPassword from '@src/screens/ForgotPassword';
+import ForgotPassword from '@src/screens/Login/Components/Forgot/ForgotPassword';
 import {ROUTE} from '@src/navigation/constant';
 
 const Stack = createNativeStackNavigator();
@@ -28,15 +28,15 @@ export default function AuthStackNavigator() {
         component={UpdateDetails}
       />
       <Stack.Screen
-        name={ROUTE.HOME}
-        options={{headerShown: false}}
-        component={HomeScreen}
-      />
-      <Stack.Screen
         name={ROUTE.ATTENDANCE}
         options={{headerShown: false}}
         component={AttendanceScreen}
       />
+      {/* <Stack.Screen
+        name={ROUTE.HOME}
+        options={{headerShown: false}}
+        component={HomeScreen}
+      /> */}
     </Stack.Navigator>
   );
 }

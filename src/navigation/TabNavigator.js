@@ -2,44 +2,64 @@
 import React, {useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {NavigationContainer} from '@react-navigation/native';
-
 import DashboardScreen from '@src/screens/DashboardScreen';
 import AttendanceScreen from '@src/screens//AttendanceScreen';
-import ProfileScreen from '@src/screens//ProfileScreen';
-import EditProfile from '@src/components/EditProfile';
 import ProfileStackNavigator from '@src/navigation/ProfileStackNavigator';
 import {TouchableOpacity} from 'react-native';
 import {scale} from 'react-native-size-matters';
 import {Colors} from '@src/theme/fonts';
 import {ROUTE} from './constant';
+import user1 from '@src/assets/images/user1.png';
+import home from '@src/assets/images/home.png';
+import book from '@src/assets/images/book.png';
 
 const Tab = createBottomTabNavigator();
 
 export default function TabStackNavigator() {
   const [attendanceStarted, setAttendanceStarted] = useState(false);
+  const [initialRoute, setInitialRoute] = useState(ROUTE.ATTENDANCE);
+
+  // const getTodayAttendance = async () => {
+  //   try {
+  //     const res = await axiosClient.get(
+  //       `attendance/check-attendance-marked/${SectionId}`,
+  //     );
+  //     if (res.data.result) {
+  //       setInitialRoute(ROUTE.DASHBOARD);
+  //     } else {
+  //       setInitialRoute(ROUTE.ATTENDANCE);
+  //     }
+  //   } catch (error) {}
+  // };
+
+  // useEffect(() => {
+  //   getTodayAttendance();
+  // });
 
   return (
     // <NavigationContainer>
     <Tab.Navigator
-      initialRouteName={ROUTE.ATTENDANCE}
+      initialRouteName={initialRoute}
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
           let rn = route.name;
 
           if (rn === ROUTE.DASHBOARD) {
-            iconName = focused ? 'bars' : 'bars';
+            iconName = home;
           } else if (rn === ROUTE.ATTENDANCE) {
-            iconName = focused ? 'book' : 'book';
+            iconName = book;
           } else if (rn === ROUTE.PROFILESCREEN) {
-            iconName = focused ? 'user' : 'user';
+            iconName = user1;
           }
           return (
-            <Icon
-              name={iconName}
-              size={30}
-              color={focused ? Colors.COLOR_7 : color}
+            <Image
+              source={iconName}
+              style={{
+                width: 25,
+                height: 25,
+                tintColor: focused ? 'purple' : 'gray',
+              }}
             />
           );
         },
@@ -54,7 +74,7 @@ export default function TabStackNavigator() {
           height: scale(70),
         },
         tabBarButton: props =>
-          attendanceStarted && route.name !== attendance ? null : (
+          attendanceStarted && route.name !== ROUTE.ATTENDANCE ? null : (
             <TouchableOpacity {...props} />
           ),
         headerShown: false,

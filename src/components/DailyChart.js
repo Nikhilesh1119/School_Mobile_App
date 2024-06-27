@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import {PieChart} from 'react-native-gifted-charts';
 import {axiosClient} from '../services/axiosClient';
 import {AuthContext} from '../context/AuthContext';
-import {Fonts} from '../theme/fonts';
+import {Fonts, Size} from '../theme/fonts';
 
 const DailyChart = () => {
   const {SectionId} = useContext(AuthContext);
@@ -26,18 +26,6 @@ const DailyChart = () => {
     },
   ];
 
-  const renderDot = color => (
-    <View
-      style={{
-        height: 10,
-        width: 10,
-        borderRadius: 5,
-        backgroundColor: color,
-        marginRight: 10,
-      }}
-    />
-  );
-
   const getDailyAttendance = async () => {
     const res = await axiosClient.get(`/attendance/daily-status/${SectionId}`);
     // console.log(res.data);
@@ -50,38 +38,38 @@ const DailyChart = () => {
     getDailyAttendance();
   }, []);
 
-  const renderLegendComponent = () => (
-    <>
+  return (
+    <View style={{paddingTop: 38,paddingBottom: 24,  alignItems: 'center'}}>
       <View
         style={{
+          height: 35,
+          width: 97,
+          borderRadius: 13,
           flexDirection: 'row',
+          alignItems: 'center',
+          backgroundColor: 'black',
+          width: 120,
+          display: 'flex',
           justifyContent: 'center',
-          marginVertical: 30,
+          alignItems: 'center',
+          position: 'absolute',
+          zIndex: 1,
+          right: 20,
+          top: 10,
         }}>
         <View
           style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            width: 120,
-            marginRight: 20,
-          }}>
-          {renderDot('#4c39a9')}
-          <Text style={{color: 'black', fontFamily: 'Satoshi'}}>
-            {presentStudents} Present
-          </Text>
-        </View>
-        <View style={{flexDirection: 'row', alignItems: 'center', width: 120}}>
-          {renderDot('#d91111')}
-          <Text style={{color: 'black', fontFamily: 'Satoshi'}}>
-            {absentStudents} Absent
-          </Text>
-        </View>
+            height: 16,
+            width: 16,
+            borderRadius: 10,
+            backgroundColor: '#D91111',
+            marginRight: 10,
+          }}
+        />
+        <Text style={{color: '#fff', fontFamily: 'Satoshi'}}>
+          {absentStudents} Absent
+        </Text>
       </View>
-    </>
-  );
-
-  return (
-    <View style={{padding: 20, alignItems: 'center'}}>
       <PieChart
         data={dailyData}
         donut
@@ -94,9 +82,9 @@ const DailyChart = () => {
             <Text
               style={{
                 color: '#a491b7',
-                fontSize: 18,
+                fontSize: Size.font_18,
                 fontWeight: 'bold',
-                fontFamily: 'Satoshi',
+                fontFamily: Fonts.BOLD,
               }}>
               Total Students
             </Text>
@@ -112,7 +100,36 @@ const DailyChart = () => {
           </View>
         )}
       />
-      {renderLegendComponent()}
+      <View
+        style={{
+          height: 35,
+          width: 97,
+          borderRadius: 13,
+          flexDirection: 'row',
+          alignItems: 'center',
+          backgroundColor: 'black',
+          width: 120,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          zIndex: 1,
+          left: 20,
+          bottom: 0,
+        }}>
+        <View
+          style={{
+            height: 16,
+            width: 16,
+            borderRadius: 10,
+            backgroundColor: '#4c39a9',
+            marginRight: 10,
+          }}
+        />
+        <Text style={{color: '#fff', fontFamily: 'Satoshi'}}>
+          {presentStudents} Present
+        </Text>
+      </View>
     </View>
   );
 };

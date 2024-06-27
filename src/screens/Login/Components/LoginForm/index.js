@@ -17,7 +17,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {AuthContext} from '@src/context/AuthContext';
 import {axiosClient} from '@src/services/axiosClient';
 import {styles} from './styles';
-import { ROUTE } from '@src/navigation/constant';
+import {ROUTE} from '@src/navigation/constant';
 
 export default function LoginForm() {
   const {login} = useContext(AuthContext);
@@ -45,30 +45,31 @@ export default function LoginForm() {
         validationSchema={userSchemaValidation}
         onSubmit={async values => {
           try {
-            // console.log(values);
-            // const res = await axiosClient.post('/teacher/login', {
-            //   user: values.user,
-            //   password: values.password,
-            // });
-            // // console.log(res.data);
-            // if (res.data.result) {
-            //   ToastAndroid.show(
-            //     'Login Successful',
-            //     ToastAndroid.LONG,
-            //     ToastAndroid.TOP,
-            //   );
-            //   setTimeout(() => {
-            //     console.log(res.data.result);
-            //     login(res.data.result.accessToken, res.data.result.firstname);
+            console.log(values);
+            const res = await axiosClient.post('/teacher/login', {
+              user: values.user,
+              password: values.password,
+            });
+            // console.log(res.data);
+            if (res.data.result) {
+              ToastAndroid.show(
+                'Login Successful',
+                ToastAndroid.TOP,
+                ToastAndroid.LONG,
+              );
+              setTimeout(() => {
+                // console.log(res.data.result);
+                login(res.data.result.accessToken, res.data.result.firstname);
                 navigation.navigate(ROUTE.UPDATEDETAILS);
-            //   }, 2000);
-            // } else {
-            //   ToastAndroid.show(
-            //     res.data.message,
-            //     ToastAndroid.LONG,
-            //     ToastAndroid.TOP,
-            //   );
-            // }
+                // navigation.navigate(ROUTE.TAB);
+              }, 2000);
+            } else {
+              ToastAndroid.show(
+                res.data.message,
+                ToastAndroid.LONG,
+                ToastAndroid.TOP,
+              );
+            }
           } catch (error) {}
         }}>
         {({

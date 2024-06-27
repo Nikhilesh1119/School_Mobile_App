@@ -20,7 +20,10 @@ const WeeklyChart = () => {
     const weeklyData = weeklyAttendance.map((count, index) => {
       const dayOfWeek = daysOfWeek[index % 7];
       return {
-        stacks: [{value: count, color: '#d91111'}],
+        stacks: [
+          {value: count, color: '#d91111'},
+          // {value: totalStudents-count, color: '#4c39a9'},
+        ],
         label: dayOfWeek,
       };
     });

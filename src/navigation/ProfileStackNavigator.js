@@ -1,11 +1,7 @@
-import { View, Text } from 'react-native';
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
-import ProfileScreen from '../screens/ProfileScreen';
-import EditProfile from '../components/EditProfile';
-// import EditProfile from '../components/EditProfile';
-
+import ProfileScreen from '@src/screens/ProfileScreen';
+import EditProfile from '@src/components/EditProfile';
 
 const Stack = createNativeStackNavigator();
 

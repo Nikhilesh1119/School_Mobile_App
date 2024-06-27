@@ -1,42 +1,7 @@
-import React from 'react';
-import {View, StyleSheet, Text, TextInput, Pressable} from 'react-native';
 import {Fonts} from '@src/theme/fonts';
+import {StyleSheet} from 'react-native';
 
-export default function ForgotPassword() {
-  return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.logoContainer}>
-          <Text style={styles.logoText}>A</Text>
-        </View>
-        <Text style={styles.logoTitle}>LOGO</Text>
-      </View>
-      <View style={styles.content}>
-        <Text style={styles.title}>To Update Password,</Text>
-        <Text style={styles.instruction}>
-          Please contact the admin of the school.
-        </Text>
-        <Text style={styles.label}>Phone, email or username</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Email / Phone / Username"
-          placeholderTextColor={'black'}
-        />
-        <Text style={styles.label}>Please enter your message here</Text>
-        <TextInput
-          style={[styles.input, styles.messageInput]}
-          placeholder="Your message"
-          multiline
-        />
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Send Message</Text>
-        </Pressable>
-      </View>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FAFAFA',
     flex: 1,
@@ -98,7 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     color: '#1C1C1C',
     fontSize: 14,
-    height:50,
+    height: 50,
     fontFamily: Fonts.LIGHT,
   },
   messageInput: {

@@ -22,6 +22,7 @@ import {Size, Weight, Colors, Fonts} from '../theme/fonts';
 import user from '@src/assets/images/user.jpg';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {axiosClient} from '@src/services/axiosClient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AttendanceDashboard = () => {
   const {ClassName, SectionName, SectionId} = useContext(AuthContext);
@@ -88,6 +89,8 @@ const AttendanceDashboard = () => {
           );
           setStudentData(res.data.result.students);
           setIsPresent(res.data.result.isPresent);
+          const a = await AsyncStorage.getItem('accessToken');
+          console.log('a', a);
         } catch (error) {
           console.error('Error fetching search results:', error);
         }
@@ -119,7 +122,7 @@ const AttendanceDashboard = () => {
                 onPress={() => setSearchInput(true)}
                 style={styles.searchInput}
                 placeholder="Search student here"
-                placeholderTextColor="#999"
+                placeholderTextColor={Colors.LIGHT_PURPLE}
                 value={searchQuery}
                 onChangeText={handleSearch}
               />
@@ -259,8 +262,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingVertical: scale(20),
-    backgroundColor: Colors.WHITE,
+    paddingVertical: scale(10),
+    backgroundColor: Colors.COLOR_6,
   },
   header: {
     paddingHorizontal: scale(20),
@@ -274,7 +277,7 @@ const styles = StyleSheet.create({
     fontSize: Size.font_20,
     fontFamily: Fonts.BOLD,
     color: Colors.COLOR_9,
-    marginBottom: scale(20),
+    marginBottom: scale(10),
   },
   searchContainer: {
     flexDirection: 'row',
@@ -282,21 +285,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: scale(20),
     paddingHorizontal: scale(10),
-    marginBottom: scale(20),
+    marginBottom: scale(10),
     borderWidth: 1,
     borderColor: Colors.BORDER,
     backgroundColor: Colors.GRAYBACK,
-    borderRadius: scale(20),
+    borderRadius: scale(14),
   },
   searchIcon: {
-    width: scale(30),
-    height: scale(30),
-    tintColor: Colors.BORDER,
+    width: scale(20),
+    height: scale(20),
+    tintColor: Colors.PURPLE,
   },
   searchInput: {
     height: scale(44),
     paddingHorizontal: scale(10),
-    color: Colors.BLACK,
+    color: Colors.PURPLE,
     width: '100%',
     fontSize: Size.font_14,
     fontFamily: Fonts.MEDIUM,
@@ -350,7 +353,6 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.BOLD,
   },
   statisticsHeader: {
-    marginBottom: scale(20),
     paddingHorizontal: scale(20),
   },
   statisticsTitle: {
@@ -363,7 +365,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.BOLD,
     color: Colors.COLOR_10,
     paddingBottom: scale(10),
-    borderBottomColor: Colors.PURPLE,
+    borderBottomColor: Colors.GRAYBACK,
     borderBottomWidth: 1,
   },
   viewSelectorContainer: {
@@ -403,7 +405,6 @@ const styles = StyleSheet.create({
     fontSize: Size.font_18,
     fontFamily: Fonts.BOLD,
     color: Colors.COLOR_9,
-    marginBottom: scale(10),
   },
 });
 
