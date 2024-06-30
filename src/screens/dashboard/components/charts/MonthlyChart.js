@@ -1,8 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {BarChart} from 'react-native-gifted-charts';
-import {axiosClient} from '../services/axiosClient';
-import {AuthContext} from '../context/AuthContext';
+import {axiosClient} from '@src/services/axiosClient';
+import {AuthContext} from '@src/context/AuthContext';
+import {Colors} from '@src/theme/fonts';
 
 const MonthlyChart = () => {
   const [monthlyData, setMonthlyData] = useState([]);
@@ -14,11 +15,15 @@ const MonthlyChart = () => {
       const res = await axiosClient.get(
         `/attendance/monthly-status/${SectionId}`,
       );
+
       const studentPresentCounts = res.data.result.monthlyAttendance;
       const monthlyData = studentPresentCounts.map((count, index) => {
         const day = index + 1;
         return {
-          stacks: [{value: count, color: '#d91111'}],
+          stacks: [
+            {value: count, color: '#d91111'},
+            {value: totalStudents - count, color: 'rgba(154, 146, 210, 0.2)'},
+          ],
           label: day % 5 === 1 ? day.toString() : '',
         };
       });
@@ -34,12 +39,14 @@ const MonthlyChart = () => {
   }, []);
 
   return (
-    <View className="items-start py-[30] bg-purple-50 rounded-lg">
+    <View style={{alignItems: 'flex-start', paddingTop: 90}}>
       <BarChart
-        width={370}
-        height={400}
+        width={360}
+        height={270}
         barWidth={8}
-        rulesColor="#4c39a9"
+        rulesColor={Colors.GRAYBORDER}
+        dashGap={0}
+        initialSpacing={0}
         spacing={4}
         noOfSections={5}
         stepValue={Math.ceil(totalStudents / 10)}
@@ -49,7 +56,13 @@ const MonthlyChart = () => {
         yAxisColor="#fff"
         yAxisTextStyle={{color: 'black'}}
       />
-      <View style={{display:'flex',flexDirection:'row', justifyContent:"space-evenly"}}>
+      <View
+        style={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+        }}>
         <Text style={{color: 'black'}}>1</Text>
         <Text style={{color: 'black'}}>6</Text>
         <Text style={{color: 'black'}}>11</Text>

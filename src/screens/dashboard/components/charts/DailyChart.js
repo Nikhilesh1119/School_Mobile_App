@@ -1,9 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {View, Text} from 'react-native';
 import {PieChart} from 'react-native-gifted-charts';
-import {axiosClient} from '../services/axiosClient';
-import {AuthContext} from '../context/AuthContext';
-import {Fonts, Size} from '../theme/fonts';
+import {axiosClient} from '@src/services/axiosClient';
+import {AuthContext} from '@src/context/AuthContext';
+import {Fonts, Size} from '@src/theme/fonts';
 
 const DailyChart = () => {
   const {SectionId} = useContext(AuthContext);

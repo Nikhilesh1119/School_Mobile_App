@@ -42,7 +42,8 @@ const colors = {
   LIGHT_RED:'rgba(217, 17, 17, 0.05)',
   LIGHT_INDIGO:'rgba(78, 41, 115, 0.05)',
   MID_PURPLE:'rgb(245,240,251)',
-  OFF_WHITE:'rgb(250,250,250)'
+  OFF_WHITE:'rgb(250,250,250)',
+  GRAYBORDER:'rgba(219, 219, 219, 1)',
 };
 
 export default colors;

@@ -8,4 +8,6 @@ export const ROUTE = {
   DASHBOARD: 'Dashboard',
   AUTH: 'Auth',
   TAB: 'Tab',
+  PROFILE: 'Profile',
+  EDITPROFILE: 'EditProfile',
 };

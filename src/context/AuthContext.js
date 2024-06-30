@@ -1,6 +1,8 @@
 import React, {createContext, useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {jwtDecode} from 'jwt-decode';
+import { useNavigation } from '@react-navigation/native';
+import { ROUTE } from '../navigation/constant';
 
 export const AuthContext = createContext();
 
@@ -13,29 +15,32 @@ export const AuthProvider = ({children}) => {
   const [SectionName, setSectionName] = useState(null);
   const [ClassName, setClassName] = useState(null);
 
-  useEffect(() => {
-    const isLogin = async () => {
-      try {
-        const token = await AsyncStorage.getItem('accessToken');
-        if (token) {
-          setAccessToken(token);
-          try {
-            const decodedToken = jwtDecode(token);
-            setTeacherId(decodedToken.teacherId);
-            setSectionId(decodedToken.sectionId);
-            setClassId(decodedToken.classId);
-            setSectionName(decodedToken.sectionName);
-            setClassName(decodedToken.className);
-          } catch (error) {
-            console.error('Failed to decode token:', error);
-          }
+  const isLogin = async () => {
+    try {
+      const token = await AsyncStorage.getItem('accessToken');
+      if (token) {
+        setAccessToken(token);
+        try {
+          const decodedToken = jwtDecode(token);
+          setTeacherId(decodedToken.teacherId);
+          setSectionId(decodedToken.sectionId);
+
+
+          setClassId(decodedToken.classId);
+          setSectionName(decodedToken.sectionName);
+          setClassName(decodedToken.className);
+        } catch (error) {
+          console.error('Failed to decode token:', error);
         }
-      } catch (e) {
-        console.log('Login error', e);
-      } finally {
-        setIsLoading(false);
       }
-    };
+    } catch (e) {
+      console.log('Login error', e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
     isLogin();
   }, []);
 
@@ -64,6 +69,7 @@ export const AuthProvider = ({children}) => {
   };
 
   const logout = async () => {
+    const navigation=useNavigation()
     try {
       await AsyncStorage.removeItem('accessToken');
       await AsyncStorage.removeItem('firstname');
@@ -73,6 +79,7 @@ export const AuthProvider = ({children}) => {
       setClassId(null);
       setSectionName(null);
       setClassName(null);
+      navigation.navigate(ROUTE.LOGIN)
     } catch (e) {
       console.error('Logout error', e);
     }

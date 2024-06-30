@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
   swipeText: {
     alignSelf: 'center',
     color: Colors.WHITE,
-    fontSize: scale(20),
+    fontSize: Size.font_16,
     fontFamily: Fonts.MEDIUM,
   },
   contentContainer: {
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
   },
   header: {
     position: 'absolute',
-    top: scale(50),
+    top: scale(30),
     width: '100%',
     alignItems: 'center',
   },
@@ -53,13 +53,13 @@ export const styles = StyleSheet.create({
     color: Colors.WHITE,
     fontSize: Size.font_24,
     top: scale(10),
-    fontFamily: Fonts.MEDIUM,
-    marginTop: scale(10),
+    fontFamily: Fonts.REGULAR,
+    marginTop: scale(12),
   },
   subHeaderText: {
     color: Colors.WHITE,
     fontSize: Size.font_24,
     top: scale(8),
-    fontFamily: Fonts.MEDIUM,
+    fontFamily: Fonts.REGULAR,
   },
 });
