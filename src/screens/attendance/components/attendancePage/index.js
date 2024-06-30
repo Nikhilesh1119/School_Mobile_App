@@ -6,10 +6,10 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import AttendanceCard from './AttendanceCard';
-import {axiosClient} from '../services/axiosClient';
-import {AuthContext} from '../context/AuthContext';
-import AttendanceList from './AttendanceList';
+import AttendanceCard from '@src/screens/attendance/components/card/index';
+import AttendanceList from '@src/screens/attendance/components/list/index';
+import {axiosClient} from '@src/services/axiosClient';
+import {AuthContext} from '@src/context/AuthContext';
 
 export default function AttendancePage({setAttendanceStarted}) {
   const {SectionId} = useContext(AuthContext);
@@ -89,10 +89,11 @@ export default function AttendancePage({setAttendanceStarted}) {
 
   const getStudent = async () => {
     try {
+      console.log(SectionId);
       const res = await axiosClient.get(
         `/student/section-students/${SectionId}`,
       );
-      // console.log(res.data.result.studentList);
+      // console.log('student', res.data);
       setStudent(res.data.result.studentList);
     } catch (error) {
       console.log(error);

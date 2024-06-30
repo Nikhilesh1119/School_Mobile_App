@@ -12,12 +12,12 @@ export const styles = StyleSheet.create({
   formContainer: {
     height: '100%',
     display: 'flex',
-    justifyContent: 'space-around',
   },
   logoContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: scale(20),
   },
   logo: {
     height: scale(40),
@@ -25,20 +25,18 @@ export const styles = StyleSheet.create({
   },
   logoText: {
     color: Colors.COLOR_7,
-    fontSize: Size.font_24,
+    fontSize: Size.font_28,
     marginLeft: scale(8),
     fontFamily: Fonts.BOLD,
   },
   infocontainer: {
-    height: '70%',
-    display: 'flex',
-    justifyContent: 'space-evenly',
+    // height: '70%',
   },
   welcomeContainer: {
     flexDirection: 'row',
     maxHeight: scale(48),
     display: 'flex-1',
-    marginTop: scale(8),
+    marginTop: scale(60),
   },
   welcomeTextPrimary: {
     fontSize: Size.font_24,
@@ -55,13 +53,13 @@ export const styles = StyleSheet.create({
     fontFamily: Fonts.REGULAR,
     fontSize: Size.font_14,
     lineHeight: scale(20),
-    marginTop: scale(8),
+    marginTop: scale(20),
   },
   inputLabel: {
     fontSize: Size.font_14,
     color: Colors.COLOR_8,
     fontFamily: Fonts.BOLD,
-    marginTop: scale(8),
+    marginTop: scale(20),
   },
   inputContainer: {
     marginTop: scale(8),
@@ -108,13 +106,13 @@ export const styles = StyleSheet.create({
     fontSize: Size.font_14,
     textAlign: 'right',
     fontFamily: Fonts.BOLD,
-    marginTop: scale(10),
+    marginTop: scale(20),
   },
   loginButton: {
     backgroundColor: Colors.COLOR_7,
     paddingVertical: scale(10),
     borderRadius: scale(24),
-    marginTop: scale(8),
+    marginTop: scale(24),
   },
   loginButtonText: {
     color: Colors.WHITE,
